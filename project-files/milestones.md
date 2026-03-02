@@ -63,11 +63,11 @@
 
 ---
 
-### Milestone 6 — Infinite Scroll
+### Milestone 6 — Infinite Scroll ✅
 
-- [ ] `app/api/posts/route.ts` — batch fetcher (`?page=2&limit=10`), returns posts as JSON
-- [ ] `InfinitePostList.tsx` — client component, intersection observer to trigger next fetch, Skeleton while loading
-- [ ] Wire `InfinitePostList.tsx` into `app/page.tsx` — first 10 posts passed as props from SSG, client fetches the rest
+- [x] `app/api/posts/route.ts` — batch fetcher (`?page=2&limit=10`), returns posts as JSON
+- [x] `InfinitePostList.tsx` — client component, intersection observer to trigger next fetch, Skeleton while loading
+- [x] Wire `InfinitePostList.tsx` into `app/page.tsx` — first 10 posts passed as props from SSG, client fetches the rest
 
 ---
 

@@ -35,6 +35,8 @@ export default async function TagPage({ params }: TagPageProps) {
     post.metadata.tags.includes(tag),
   );
 
+  const initialPosts = filteredPosts.slice(0, 10);
+
   return (
     <div className="container max-w-4xl py-12 md:py-24 animate-in fade-in slide-in-from-bottom-4 duration-1000">
       <div className="flex flex-col gap-4 mb-12">
@@ -51,7 +53,7 @@ export default async function TagPage({ params }: TagPageProps) {
         </p>
       </div>
 
-      <InfinitePostList initialPosts={filteredPosts} />
+      <InfinitePostList initialPosts={initialPosts} tag={tag} />
     </div>
   );
 }
