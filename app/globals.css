@@ -2,7 +2,16 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+@plugin "@tailwindcss/typography";
+
 @custom-variant dark (&:is(.dark *));
+
+@layer components {
+  .container {
+    @apply mx-auto w-full px-4 sm:px-6 lg:px-8;
+    max-width: theme(--breakpoint-xl);
+  }
+}
 
 @theme inline {
   --color-background: var(--background);
