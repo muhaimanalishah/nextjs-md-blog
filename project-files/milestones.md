@@ -81,13 +81,13 @@
 
 ---
 
-### Milestone 8 — Polish & QA
+### Milestone 8 — Polish & QA ✅
 
-- [ ] Dark mode testing across all pages
-- [ ] Mobile responsiveness across all pages
-- [ ] Bilingual toggle testing — verify `/blog/[slug]/ur` works, lang toggle hidden when `hasUrdu: false`, 404 on missing `/ur` routes
-- [ ] 404 page testing — bad slugs, bad tags, `/ur` on English-only posts
-- [ ] Infinite scroll testing — correct batch order, Skeleton state, end of list behavior
-- [ ] RSS feed validation — test in an actual RSS reader
-- [ ] Lighthouse audit (performance, SEO, accessibility)
+- [x] Dark mode testing across all pages
+- [x] Mobile responsiveness across all pages
+- [x] Bilingual toggle testing — verify `/blog/[slug]/ur` works, lang toggle hidden when `hasUrdu: false`, 404 on missing `/ur` routes
+- [x] 404 page testing — bad slugs, bad tags, `/ur` on English-only posts
+- [x] Infinite scroll testing — correct batch order, Skeleton state, end of list behavior
+- [x] RSS feed validation — test in an actual RSS reader
+- [x] Lighthouse audit (performance, SEO, accessibility)
 - [x] Write real `content/about.mdx`
