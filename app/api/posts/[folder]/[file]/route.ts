@@ -4,7 +4,7 @@ import path from "path";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { folder: string; file: string } },
+  { params }: { params: Promise<{ folder: string; file: string }> },
 ) {
   const { folder, file } = await params;
   const imagePath = path.join(process.cwd(), "content/posts", folder, file);

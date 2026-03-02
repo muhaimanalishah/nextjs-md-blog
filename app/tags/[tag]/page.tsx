@@ -38,7 +38,7 @@ export default async function TagPage({ params }: TagPageProps) {
   const initialPosts = filteredPosts.slice(0, 10);
 
   return (
-    <div className="container max-w-4xl py-12 md:py-24 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+    <div className="container max-w-6xl py-12 md:py-24 animate-in fade-in slide-in-from-bottom-4 duration-1000">
       <div className="flex flex-col gap-4 mb-12">
         <div className="flex items-center gap-3">
           <span className="text-muted-foreground">Tagged with:</span>
