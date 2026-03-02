@@ -2,11 +2,10 @@
 
 ### Milestone 1 — Project Setup
 
-- Init Next.js 16.1 with TypeScript + Turbopack
-- Install & configure Tailwind CSS v4
-- Install & configure shadcn/ui (new-york style)
-- Set up `next-themes` for dark mode
-- Set up folder structure (all empty files/folders in place)
+[x] Init Next.js 16.1 with TypeScript + Turbopack
+[x] Install & configure Tailwind CSS v4
+[x] Install & configure shadcn/ui (new-york style)
+[x] Set up folder structure (all empty files/folders in place)
 
 ---
 
