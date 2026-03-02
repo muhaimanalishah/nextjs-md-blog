@@ -1,4 +1,5 @@
 import { Post } from "@/lib/posts";
+import { PostCard } from "./PostCard";
 
 interface InfinitePostListProps {
   initialPosts: Post[];
@@ -6,12 +7,9 @@ interface InfinitePostListProps {
 
 export function InfinitePostList({ initialPosts }: InfinitePostListProps) {
   return (
-    <div className="space-y-8">
+    <div className="grid gap-6">
       {initialPosts.map((post) => (
-        <div key={post.slug} className="p-4 border rounded-lg">
-          <h2 className="text-xl font-bold">{post.metadata.title}</h2>
-          <p className="text-muted-foreground">{post.metadata.excerpt}</p>
-        </div>
+        <PostCard key={post.slug} post={post} />
       ))}
       <div className="pt-8 text-center text-sm text-muted-foreground">
         More posts coming soon...

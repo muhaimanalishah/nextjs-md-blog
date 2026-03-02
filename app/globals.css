@@ -48,7 +48,7 @@
 }
 
 :root {
-  --radius: 0.625rem;
+  --radius: 0rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -149,12 +149,9 @@ code[data-line-numbers] > span[data-line]::before {
   @apply mr-4 inline-block w-4 text-right text-muted-foreground/50;
 }
 
-[data-line--highlighted] {
-  @apply -mx-4 border-l-4 border-primary bg-primary/10 px-4;
-}
-
+[data-highlighted-line],
 [data-highlighted-chars] {
-  @apply rounded bg-primary/20 p-1;
+  @apply -mx-4 border-l-4 border-primary bg-primary/10 px-4;
 }
 
 /* Shiki Dual Theme */

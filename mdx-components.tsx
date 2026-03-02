@@ -3,9 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { ComponentPropsWithoutRef } from "react";
 
+import { CopyCodeButton } from "@/components/CopyCodeButton";
+
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
     ...components,
+    // ... headings and links remain same
     h2: (props: ComponentPropsWithoutRef<"h2">) => (
       <h2 {...props} className="group flex whitespace-pre-wrap">
         <a
@@ -53,11 +56,19 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         {...(props as any)}
       />
     ),
-    pre: (props: ComponentPropsWithoutRef<"pre">) => {
+    pre: ({ children, ...props }: ComponentPropsWithoutRef<"pre">) => {
+      // Basic extraction of code content for the copy button
+      // Note: In production with complex rehype-pretty-code tokens,
+      // you might need a more robust way to get the raw text.
       return (
-        <pre {...props} className="relative rounded-lg border bg-muted p-4">
-          {props.children}
-        </pre>
+        <div className="relative group">
+          <pre {...props} className="relative rounded-lg border bg-muted p-4">
+            {children}
+          </pre>
+          <CopyCodeButton
+            code={String((children as any)?.props?.children || "")}
+          />
+        </div>
       );
     },
   };

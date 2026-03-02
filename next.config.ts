@@ -1,34 +1,23 @@
 import type { NextConfig } from "next";
 import createMDX from "@next/mdx";
-import remarkGfm from "remark-gfm";
-import rehypePrettyCode from "rehype-pretty-code";
 
 const nextConfig: NextConfig = {
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
+  experimental: {
+    mdxRs: true,
+  },
 };
 
 const withMDX = createMDX({
   options: {
-    remarkPlugins: [remarkGfm],
+    remarkPlugins: ["remark-gfm"],
     rehypePlugins: [
       [
-        rehypePrettyCode,
+        "rehype-pretty-code",
         {
           theme: {
             dark: "github-dark",
             light: "github-light",
-          },
-          onVisitLine(node: any) {
-            // Prevent lines from collapsing in `display: grid` mode, and allow empty lines to be copy/pasted
-            if (node.children.length === 0) {
-              node.children = [{ type: "text", value: " " }];
-            }
-          },
-          onVisitHighlightedLine(node: any) {
-            node.properties.className.push("line--highlighted");
-          },
-          onVisitHighlightedWord(node: any) {
-            node.properties.className = ["word--highlighted"];
           },
         },
       ],
