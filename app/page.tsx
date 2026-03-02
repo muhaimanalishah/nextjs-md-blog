@@ -1,5 +1,12 @@
 import { getAllPosts } from "@/lib/posts";
 import { InfinitePostList } from "@/components/InfinitePostList";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Home",
+  description:
+    "Exploring the latest in web development, bilingual architecture, and more.",
+};
 
 export default async function Home() {
   const allPosts = await getAllPosts();

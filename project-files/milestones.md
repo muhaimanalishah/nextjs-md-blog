@@ -71,13 +71,13 @@
 
 ---
 
-### Milestone 7 — Feeds & SEO
+### Milestone 7 — Feeds & SEO ✅
 
-- [ ] `app/feed.xml/route.ts` — RSS feed, English only, 10 most recent posts, excerpt only
-- [ ] `app/sitemap.xml/route.ts` — includes all `/blog/[slug]` and `/blog/[slug]/ur` routes (only where `hasUrdu: true`)
-- [ ] `app/robots.txt/route.ts`
-- [ ] `generateMetadata()` on every page (`/`, `/blog/[slug]`, `/blog/[slug]/ur`, `/tags`, `/tags/[tag]`, `/about`)
-- [ ] Auto-discover RSS via `<link rel="alternate">` in `app/layout.tsx`
+- [x] `app/feed.xml/route.ts` — RSS feed, English only, 10 most recent posts, excerpt only
+- [x] `app/sitemap.xml/route.ts` — includes all `/blog/[slug]` and `/blog/[slug]/ur` routes (only where `hasUrdu: true`)
+- [x] `app/robots.txt/route.ts`
+- [x] `generateMetadata()` on every page (`/`, `/blog/[slug]`, `/blog/[slug]/ur`, `/tags`, `/tags/[tag]`, `/about`)
+- [x] Auto-discover RSS via `<link rel="alternate">` in `app/layout.tsx`
 
 ---
 

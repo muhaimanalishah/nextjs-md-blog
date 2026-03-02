@@ -1,7 +1,10 @@
 import { NextResponse } from "next/server";
+import { generateRssFeed } from "@/lib/rss";
 
 export async function GET() {
-  return new NextResponse("<rss version='2.0'></rss>", {
-    headers: { "Content-Type": "application/xml" },
+  const feed = await generateRssFeed();
+
+  return new NextResponse(feed, {
+    headers: { "Content-Type": "application/xml; charset=utf-8" },
   });
 }
