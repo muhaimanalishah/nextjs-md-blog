@@ -79,7 +79,13 @@ export function InfinitePostList({ initialPosts, tag }: InfinitePostListProps) {
           </div>
         )}
         {!hasMore && posts.length > 0 && (
-          <span className="opacity-60">You've reached the end! 🎉</span>
+          <div className="flex items-center gap-4 w-full py-12">
+            <div className="h-px flex-1 bg-border" />
+            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground/40 whitespace-nowrap">
+              End of the road
+            </span>
+            <div className="h-px flex-1 bg-border" />
+          </div>
         )}
       </div>
     </div>
