@@ -49,7 +49,7 @@
 ### Milestone 5 — Components ✅ (Partial)
 
 - [x] `Header.tsx` — Nav, dark mode toggle, lang toggle, hamburger menu
-- [ ] `MobileNav.tsx` — Sheet drawer for mobile (Deferred)
+- [x] `MobileNav.tsx` — Sheet drawer for mobile
 - [x] `PostCard.tsx` — Cover image, title, date, excerpt, tags
 - [x] `TagBadge.tsx` — Clickable tag pill linking to `/tags/[tag]`
 - [x] `LangToggle.tsx` — Plain `next/link`: `/blog/[slug]` ↔ `/blog/[slug]/ur`. Hidden if `hasUrdu: false`
@@ -90,4 +90,4 @@
 - [ ] Infinite scroll testing — correct batch order, Skeleton state, end of list behavior
 - [ ] RSS feed validation — test in an actual RSS reader
 - [ ] Lighthouse audit (performance, SEO, accessibility)
-- [ ] Write real `content/about.mdx`
+- [x] Write real `content/about.mdx`

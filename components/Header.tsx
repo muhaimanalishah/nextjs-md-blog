@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { ThemeToggle } from "./ThemeToggle";
+import { MobileNav } from "./MobileNav";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 
@@ -42,6 +43,7 @@ export function Header() {
         </div>
         <div className="flex items-center gap-2">
           <ThemeToggle />
+          <MobileNav />
         </div>
       </div>
     </header>
