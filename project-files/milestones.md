@@ -11,11 +11,11 @@
 
 ### Milestone 2 — Content Layer
 
-- Set up `content/posts/` folder structure
-- Write `lib/posts.ts` (scan folders, read metadata, strip date prefix, `hasUrdu` flag, reading time, prev/next)
-- Write `lib/rss.ts`
-- Write `lib/lang.ts` (cookie logic)
-- Create 2-3 sample posts to test against
+[x] Set up `content/posts/` folder structure
+[x] Write `lib/posts.ts` (scan folders, read metadata, strip date prefix, `hasUrdu` flag, reading time, prev/next)
+[x] Write `lib/rss.ts`
+[x] Write `lib/lang.ts` (cookie logic)
+[x] Create 2-3 sample posts to test against
 
 ---
 
