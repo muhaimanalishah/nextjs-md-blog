@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import matter from "gray-matter";
 
 export interface PostMetadata {
   title: string;
@@ -18,39 +19,14 @@ export interface Post {
 }
 
 export interface SinglePost extends Post {
-  prev: Post | null;
-  next: Post | null;
+  older: Post | null;
+  newer: Post | null;
 }
 
 const postsDirectory = path.join(process.cwd(), "content/posts");
 
-function parseMetadata(content: string): PostMetadata {
-  const titleMatch = content.match(/title:\s*["'](.*?)["']/);
-  const dateMatch = content.match(/date:\s*["'](.*?)["']/);
-  const excerptMatch = content.match(/excerpt:\s*["'](.*?)["']/);
-  const coverMatch = content.match(/cover:\s*["'](.*?)["']/);
-
-  const tagsMatch = content.match(/tags:\s*\[(.*?)\]/);
-  const tags = tagsMatch
-    ? tagsMatch[1]
-        .split(",")
-        .map((t) => t.replace(/["'\s]/g, ""))
-        .filter(Boolean)
-    : [];
-
-  return {
-    title: titleMatch?.[1] || "",
-    date: dateMatch?.[1] || "",
-    excerpt: excerptMatch?.[1] || "",
-    tags,
-    cover: coverMatch?.[1],
-  };
-}
-
 function calculateReadingTime(text: string): number {
-  // Strip metadata block and calculate words
-  const content = text.replace(/export const metadata = \{[\s\S]*?\}/, "");
-  const words = content.split(/\s+/).filter(Boolean).length;
+  const words = text.split(/\s+/).filter(Boolean).length;
   return Math.max(1, Math.ceil(words / 200));
 }
 
@@ -70,9 +46,9 @@ export async function getAllPosts(): Promise<Post[]> {
       enContent = fs.readFileSync(enMdxPath, "utf8");
     }
 
-    const metadata = parseMetadata(enContent);
+    const { data: metadata, content } = matter(enContent);
     const hasUrdu = fs.existsSync(urMdxPath);
-    const readingTime = calculateReadingTime(enContent);
+    const readingTime = calculateReadingTime(content);
 
     // Strip date prefix: YYYY-MM-DD-slug
     const nameMatch = folder.match(/^\d{4}-\d{2}-\d{2}-(.*)$/);
@@ -81,7 +57,7 @@ export async function getAllPosts(): Promise<Post[]> {
     return {
       slug,
       folder,
-      metadata,
+      metadata: metadata as PostMetadata,
       hasUrdu,
       readingTime,
     };
@@ -104,12 +80,12 @@ export async function getPostBySlug(slug: string): Promise<SinglePost | null> {
 
   // Previous post is index + 1 (older), Next post is index - 1 (newer)
   // because the list is sorted descending
-  const prev = index < allPosts.length - 1 ? allPosts[index + 1] : null;
-  const next = index > 0 ? allPosts[index - 1] : null;
+  const older = index < allPosts.length - 1 ? allPosts[index + 1] : null;
+  const newer = index > 0 ? allPosts[index - 1] : null;
 
   return {
     ...post,
-    prev,
-    next,
+    older,
+    newer,
   };
 }

@@ -1,11 +1,10 @@
-export const metadata = {
-  title: "How I Implemented Bilingual Support",
-  date: "2026-03-03",
-  tags: ["i18n", "architecture"],
-  excerpt:
-    "A look at the strategy for supporting both English and Roman Urdu without duplicating metadata.",
-  cover: "./cover.jpg",
-};
+---
+title: "How I Implemented Bilingual Support"
+date: "2026-03-03"
+tags: ["i18n", "architecture"]
+excerpt: "A look at the strategy for supporting both English and Roman Urdu without duplicating metadata."
+cover: "./cover.jpg"
+---
 
 # How I Implemented Bilingual Support
 
@@ -15,7 +14,8 @@ One of the core requirements for this blog was supporting both English and Roman
 
 I decided to use a folder-based structure where `en.mdx` acts as the source of truth for metadata.
 
-- `en.mdx`: Contains the exported `metadata` object.
+- `en.mdx`: Contains the YAML frontmatter and English content.
 - `ur.mdx`: Contains only the content.
 
 This ensures that tags, dates, and excerpts are consistent across both versions.
+
