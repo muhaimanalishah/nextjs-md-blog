@@ -46,20 +46,20 @@
 
 ---
 
-### Milestone 5 — Components
+### Milestone 5 — Components ✅ (Partial)
 
-- [ ] `Header.tsx` — Nav, dark mode toggle, lang toggle, hamburger menu
-- [ ] `MobileNav.tsx` — Sheet drawer for mobile
-- [ ] `PostCard.tsx` — Cover image, title, date, excerpt, tags
-- [ ] `TagBadge.tsx` — Clickable tag pill linking to `/tags/[tag]`
-- [ ] `LangToggle.tsx` — Plain `next/link`: `/blog/[slug]` ↔ `/blog/[slug]/ur`. Hidden if `hasUrdu: false`
-- [ ] `InfinitePostList.tsx` — Client component, infinite scroll with Skeleton loading state
-- [ ] `TableOfContents.tsx` — Sticky on desktop, hidden on mobile, auto-generated from `h2`/`h3`
-- [ ] `ReadingTime.tsx` — Displays `readingTime` from post metadata
-- [ ] `PostNavigation.tsx` — Older / Newer post links
-- [ ] `CopyCodeButton.tsx` — Client component, injected into every `<pre>` block
-- [ ] `ShareButtons.tsx` — Share to X, copy link to clipboard
-- [ ] `MDXComponents.tsx` — All element overrides (`pre`, `a`, `img`, `h2`, `h3`)
+- [x] `Header.tsx` — Nav, dark mode toggle, lang toggle, hamburger menu
+- [ ] `MobileNav.tsx` — Sheet drawer for mobile (Deferred)
+- [x] `PostCard.tsx` — Cover image, title, date, excerpt, tags
+- [x] `TagBadge.tsx` — Clickable tag pill linking to `/tags/[tag]`
+- [x] `LangToggle.tsx` — Plain `next/link`: `/blog/[slug]` ↔ `/blog/[slug]/ur`. Hidden if `hasUrdu: false`
+- [x] `InfinitePostList.tsx` — Custom cards & styling
+- [x] `TableOfContents.tsx` — Sticky on desktop, auto-generated from `h2`/`h3`
+- [x] `ReadingTime.tsx` — Displays `readingTime` from post metadata
+- [x] `PostNavigation.tsx` — Older / Newer post links
+- [x] `CopyCodeButton.tsx` — Client component, injected into every `<pre>` block
+- [ ] `ShareButtons.tsx` — Social sharing (Deferred to next milestone)
+- [x] `MDXComponents.tsx` — All element overrides integration
 
 ---
 
