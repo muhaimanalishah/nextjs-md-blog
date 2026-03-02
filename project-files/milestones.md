@@ -1,6 +1,6 @@
 ## 🏁 Milestones
 
-### Milestone 1 — Project Setup
+### Milestone 1 — Project Setup ✅
 
 - [x] Init Next.js 16.1 with TypeScript + Turbopack
 - [x] Install & configure Tailwind CSS v4
@@ -20,29 +20,29 @@
 
 ---
 
-### Milestone 3 — MDX Pipeline
+### Milestone 3 — MDX Pipeline ✅
 
-- [ ] Install MDX packages (`@next/mdx`, `@mdx-js/loader`, `@mdx-js/react`)
-- [ ] Configure `@next/mdx` in `next.config.ts`
-- [ ] Add `remark-gfm`
-- [ ] Set up `rehype-pretty-code` + `shiki` (github-dark / github-light, dual theme via CSS variables)
-- [ ] Add line numbers via CSS counters
-- [ ] Add file name label support in code fences
-- [ ] Set up `mdx-components.tsx` with all overrides (`pre`, `a`, `img`, `h2`, `h3`)
-- [ ] Verify MDX renders correctly with syntax highlighting in both light and dark mode
+- [x] Install MDX packages (`@next/mdx`, `@mdx-js/loader`, `@mdx-js/react`)
+- [x] Configure `@next/mdx` in `next.config.ts`
+- [x] Add `remark-gfm`
+- [x] Set up `rehype-pretty-code` + `shiki` (github-dark / github-light, dual theme via CSS variables)
+- [x] Add line numbers via CSS counters
+- [x] Add file name label support in code fences
+- [x] Set up `mdx-components.tsx` with all overrides (`pre`, `a`, `img`, `h2`, `h3`)
+- [x] Verify MDX renders correctly with syntax highlighting in both light and dark mode
 
 ---
 
-### Milestone 4 — Core Pages (Static)
+### Milestone 4 — Core Pages (Static) ✅
 
-- [ ] `app/layout.tsx` — ThemeProvider, Header (no LangProvider needed)
-- [ ] `app/page.tsx` — Homepage, first 10 posts SSG
-- [ ] `app/not-found.tsx` — Custom 404 (handles bad slugs, bad tags, missing `/ur` routes)
-- [ ] `app/blog/[slug]/page.tsx` — English post page (SSG via `generateStaticParams`)
-- [ ] `app/blog/[slug]/ur/page.tsx` — Roman Urdu post page (SSG, only for posts where `hasUrdu: true`, `notFound()` otherwise)
-- [ ] `app/tags/page.tsx` — All tags index, sorted by post count
-- [ ] `app/tags/[tag]/page.tsx` — Posts by tag (SSG via `generateStaticParams`)
-- [ ] `app/about/page.tsx` — Renders `content/about.mdx`
+- [x] `app/layout.tsx` — ThemeProvider, Header (no LangProvider needed)
+- [x] `app/page.tsx` — Homepage, first 10 posts SSG
+- [x] `app/not-found.tsx` — Custom 404 (handles bad slugs, bad tags, missing `/ur` routes)
+- [x] `app/blog/[slug]/page.tsx` — English post page (SSG via `generateStaticParams`)
+- [x] `app/blog/[slug]/ur/page.tsx` — Roman Urdu post page (SSG, only for posts where `hasUrdu: true`, `notFound()` otherwise)
+- [x] `app/tags/page.tsx` — All tags index, sorted by post count
+- [x] `app/tags/[tag]/page.tsx` — Posts by tag (SSG via `generateStaticParams`)
+- [x] `app/about/page.tsx` — Renders `content/about.mdx`
 
 ---
 

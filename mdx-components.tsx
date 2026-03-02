@@ -1,7 +1,7 @@
 import type { MDXComponents } from "mdx/types";
 import Image from "next/image";
 import Link from "next/link";
-import React, { ComponentPropsWithoutRef } from "react";
+import { ComponentPropsWithoutRef } from "react";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {

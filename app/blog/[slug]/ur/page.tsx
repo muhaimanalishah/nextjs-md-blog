@@ -9,9 +9,12 @@ interface PostPageProps {
 
 export async function generateStaticParams() {
   const posts = await getAllPosts();
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
+  // Only generate routes for posts that have an Urdu version
+  return posts
+    .filter((post) => post.hasUrdu)
+    .map((post) => ({
+      slug: post.slug,
+    }));
 }
 
 export async function generateMetadata({
@@ -20,29 +23,29 @@ export async function generateMetadata({
   const { slug } = await params;
   const post = await getPostBySlug(slug);
 
-  if (!post) {
+  if (!post || !post.hasUrdu) {
     return {
       title: "Post Not Found",
     };
   }
 
   return {
-    title: post.metadata.title,
+    title: `${post.metadata.title} (Roman Urdu)`,
     description: post.metadata.excerpt,
   };
 }
 
-export default async function PostPage({ params }: PostPageProps) {
+export default async function UrduPostPage({ params }: PostPageProps) {
   const { slug } = await params;
   const post = await getPostBySlug(slug);
 
-  if (!post) {
+  if (!post || !post.hasUrdu) {
     notFound();
   }
 
-  // Dynamically import the MDX content
+  // Dynamically import the Roman Urdu MDX content
   const Content = dynamic(
-    () => import(`@/content/posts/${post.folder}/en.mdx`),
+    () => import(`@/content/posts/${post.folder}/ur.mdx`),
   );
 
   return (
@@ -52,6 +55,8 @@ export default async function PostPage({ params }: PostPageProps) {
           {post.metadata.title}
         </h1>
         <div className="flex items-center gap-2 text-muted-foreground text-sm">
+          <span className="font-medium text-primary">Roman Urdu</span>
+          <span>•</span>
           <time dateTime={post.metadata.date}>
             {new Date(post.metadata.date).toLocaleDateString("en-US", {
               day: "numeric",
