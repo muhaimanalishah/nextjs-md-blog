@@ -28,7 +28,7 @@ export function LangToggle({ hasUrdu }: LangToggleProps) {
     >
       <Link href={toggleHref}>
         <Languages className="w-4 h-4" />
-        <span className="font-medium">
+        <span className="font-medium text-xs">
           {isUrdu ? "Switch to English" : "Urdu mein parhain"}
         </span>
       </Link>

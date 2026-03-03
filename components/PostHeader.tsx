@@ -22,7 +22,7 @@ export function PostHeader({ post, isUrdu = false }: PostHeaderProps) {
             : post.metadata.title}
         </h1>
 
-        <div className="flex flex-wrap items-center gap-4 text-[10px] uppercase tracking-[0.2em] font-black text-muted-foreground/80">
+        <div className="flex flex-wrap items-center gap-4 text-[10px] uppercase tracking-[0.2em] font-sans font-bold text-muted-foreground/80">
           <time dateTime={post.metadata.date}>
             {new Date(post.metadata.date).toLocaleDateString("en-US", {
               day: "numeric",

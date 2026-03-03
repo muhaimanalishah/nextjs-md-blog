@@ -18,7 +18,7 @@ export function PostNavigation({ older, newer }: PostNavigationProps) {
             href={`/blog/${older.slug}`}
             className="group flex flex-col items-start gap-2 p-6 rounded-none border hover:bg-accent/50 transition-all h-full"
           >
-            <span className="text-xs text-muted-foreground font-semibold uppercase tracking-widest flex items-center gap-1">
+            <span className="text-xs text-muted-foreground font-sans font-semibold uppercase tracking-widest flex items-center gap-1">
               <ArrowLeft className="w-3 h-3 group-hover:-translate-x-1 transition-transform" />
               Older Post
             </span>
@@ -36,7 +36,7 @@ export function PostNavigation({ older, newer }: PostNavigationProps) {
             href={`/blog/${newer.slug}`}
             className="group flex flex-col items-end gap-2 p-6 rounded-none border hover:bg-accent/50 transition-all text-right h-full"
           >
-            <span className="text-xs text-muted-foreground font-semibold uppercase tracking-widest flex items-center gap-1">
+            <span className="text-xs text-muted-foreground font-sans font-semibold uppercase tracking-widest flex items-center gap-1">
               Newer Post
               <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
             </span>

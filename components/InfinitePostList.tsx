@@ -68,7 +68,7 @@ export function InfinitePostList({ initialPosts, tag }: InfinitePostListProps) {
   return (
     <div className="flex flex-col gap-10">
       <div className="flex items-center justify-between border-b border-border pb-6">
-        <span className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground/60">
+        <span className="text-[10px] font-sans font-bold uppercase tracking-[0.3em] text-muted-foreground/60">
           Viewing {posts.length} {posts.length === 1 ? "Post" : "Posts"}
         </span>
 
@@ -76,7 +76,7 @@ export function InfinitePostList({ initialPosts, tag }: InfinitePostListProps) {
           <button
             onClick={() => setLayout("list")}
             className={cn(
-              "flex items-center gap-2 px-3 py-1.5 transition-all text-[10px] font-black uppercase tracking-widest",
+              "flex items-center gap-2 px-3 py-1.5 transition-all text-[10px] font-sans font-bold uppercase tracking-widest",
               layout === "list"
                 ? "bg-foreground text-background"
                 : "text-muted-foreground hover:text-foreground",
@@ -88,7 +88,7 @@ export function InfinitePostList({ initialPosts, tag }: InfinitePostListProps) {
           <button
             onClick={() => setLayout("grid")}
             className={cn(
-              "flex items-center gap-2 px-3 py-1.5 transition-all text-[10px] font-black uppercase tracking-widest",
+              "flex items-center gap-2 px-3 py-1.5 transition-all text-[10px] font-sans font-bold uppercase tracking-widest",
               layout === "grid"
                 ? "bg-foreground text-background"
                 : "text-muted-foreground hover:text-foreground",
@@ -140,8 +140,8 @@ export function InfinitePostList({ initialPosts, tag }: InfinitePostListProps) {
         {!hasMore && posts.length > 0 && (
           <div className="flex items-center gap-4 w-full py-12">
             <div className="h-px flex-1 bg-border/50" />
-            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground/30 whitespace-nowrap">
-              End of Edition
+            <span className="text-[10px] font-sans font-bold uppercase tracking-[0.3em] text-muted-foreground/30 whitespace-nowrap">
+              End of List
             </span>
             <div className="h-px flex-1 bg-border/50" />
           </div>

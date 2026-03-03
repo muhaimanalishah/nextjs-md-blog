@@ -28,7 +28,7 @@ export function PostCard({ post, layout = "list" }: PostCardProps) {
         )}
 
         <div className="flex-1 flex flex-col justify-center min-w-0">
-          <div className="flex items-center justify-between text-[10px] text-muted-foreground font-black uppercase tracking-widest mb-2">
+          <div className="flex items-center justify-between text-[10px] text-muted-foreground font-sans font-bold uppercase tracking-widest mb-2">
             <time dateTime={post.metadata.date}>
               {new Date(post.metadata.date).toLocaleDateString("en-US", {
                 month: "short",
@@ -53,11 +53,11 @@ export function PostCard({ post, layout = "list" }: PostCardProps) {
                 <TagBadge key={tag} tag={tag} />
               ))}
             </div>
-            <ReadingTime minutes={post.readingTime} />
+            <ReadingTime minutes={post.readingTime} className="text-sm" />
             {post.hasUrdu && (
               <Badge
                 variant="outline"
-                className="ml-auto text-primary border-primary/20 bg-primary/5 px-2 py-0 border-none text-[8px] font-black uppercase tracking-widest rounded-none"
+                className="ml-auto text-primary border-primary/20 bg-primary/5 px-2 py-1 border-none text-[8px] font-sans font-bold uppercase tracking-widest rounded-none"
               >
                 Urdu
               </Badge>
@@ -81,7 +81,7 @@ export function PostCard({ post, layout = "list" }: PostCardProps) {
       )}
 
       <div className="flex flex-col flex-1 py-6 px-4 border-b border-border/50 group-hover:bg-accent/5 transition-colors">
-        <div className="flex items-center justify-between text-[10px] text-muted-foreground font-black uppercase tracking-widest mb-4">
+        <div className="flex items-center justify-between text-[10px] text-muted-foreground font-sans font-bold uppercase tracking-widest mb-4">
           <time dateTime={post.metadata.date}>
             {new Date(post.metadata.date).toLocaleDateString("en-US", {
               day: "numeric",
@@ -110,7 +110,7 @@ export function PostCard({ post, layout = "list" }: PostCardProps) {
           {post.hasUrdu && (
             <Badge
               variant="outline"
-              className="ml-auto text-primary border-none bg-primary/5 px-2 py-0 text-[8px] font-black uppercase tracking-widest rounded-none"
+              className="ml-auto text-primary border-none bg-primary/5 px-2 py-1 text-[8px] font-sans font-bold uppercase tracking-widest rounded-none"
             >
               Urdu
             </Badge>

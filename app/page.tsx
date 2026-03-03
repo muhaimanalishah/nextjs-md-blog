@@ -31,7 +31,7 @@ export default async function Home() {
                 Exploring the latest in web development, bilingual architecture,
                 and the future of modular content creation.
               </p>
-              <div className="flex items-center gap-4 text-xs font-bold uppercase tracking-widest text-foreground">
+              <div className="flex items-center gap-4 text-xs font-sans font-bold uppercase tracking-widest text-foreground">
                 <span>Read the latest</span>
                 <div className="h-px w-12 bg-foreground" />
               </div>

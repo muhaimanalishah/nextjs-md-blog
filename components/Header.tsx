@@ -25,9 +25,9 @@ export function Header() {
               key={item.href}
               href={item.href}
               className={cn(
-                "text-[11px] font-black tracking-[0.2em] transition-colors hover:text-primary",
+                "text-[11px] font-sans tracking-[0.2em] transition-colors hover:text-primary",
                 pathname === item.href
-                  ? "text-foreground"
+                  ? "text-foreground font-bold"
                   : "text-muted-foreground",
               )}
             >

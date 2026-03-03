@@ -51,7 +51,7 @@ export default async function PostPage({ params }: PostPageProps) {
   );
 
   return (
-    <div className="container relative py-12 md:py-24 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+    <div className="container relative py-8 md:py-16 animate-in fade-in slide-in-from-bottom-4 duration-1000">
       <PostHeader post={post} />
 
       <div className="flex flex-col lg:flex-row gap-16 max-w-6xl mx-auto">
