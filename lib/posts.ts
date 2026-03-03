@@ -4,6 +4,7 @@ import matter from "gray-matter";
 
 export interface PostMetadata {
   title: string;
+  titleUrdu?: string;
   date: string;
   tags: string[];
   excerpt: string;

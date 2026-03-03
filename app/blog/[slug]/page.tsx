@@ -35,6 +35,7 @@ export async function generateMetadata({
 }
 
 import { TableOfContents } from "@/components/TableOfContents";
+import { PostHeader } from "@/components/PostHeader";
 
 export default async function PostPage({ params }: PostPageProps) {
   const { slug } = await params;
@@ -50,36 +51,22 @@ export default async function PostPage({ params }: PostPageProps) {
   );
 
   return (
-    <div className="container relative max-w-5xl py-12 md:py-24 animate-in fade-in slide-in-from-bottom-4 duration-1000">
-      <div className="flex flex-col lg:flex-row gap-12">
-        <article className="max-w-3xl flex-1">
-          <div className="flex flex-col gap-4 mb-8">
-            <LangToggle hasUrdu={post.hasUrdu} />
-            <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl">
-              {post.metadata.title}
-            </h1>
-            <div className="flex items-center gap-2 text-muted-foreground text-sm">
-              <time dateTime={post.metadata.date}>
-                {new Date(post.metadata.date).toLocaleDateString("en-US", {
-                  day: "numeric",
-                  month: "long",
-                  year: "numeric",
-                })}
-              </time>
-              <span>•</span>
-              <span>{post.readingTime} min read</span>
-            </div>
-          </div>
+    <div className="container relative py-12 md:py-24 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+      <PostHeader post={post} />
 
-          <div className="prose prose-zinc dark:prose-invert max-w-none">
+      <div className="flex flex-col lg:flex-row gap-16 max-w-6xl mx-auto">
+        <article className="flex-1 min-w-0">
+          <div className="prose prose-zinc dark:prose-invert prose-lg md:prose-xl max-w-none font-serif leading-relaxed">
             <Content />
           </div>
 
-          <PostNavigation older={post.older} newer={post.newer} />
+          <div className="mt-24 pt-12 border-t border-border/50">
+            <PostNavigation older={post.older} newer={post.newer} />
+          </div>
         </article>
 
         <aside className="hidden lg:block w-64 shrink-0">
-          <div className="sticky top-28">
+          <div className="sticky top-28 space-y-8">
             <TableOfContents />
           </div>
         </aside>

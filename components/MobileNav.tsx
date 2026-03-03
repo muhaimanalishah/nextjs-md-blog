@@ -14,9 +14,9 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const NAV_ITEMS = [
-  { name: "Home", href: "/" },
-  { name: "Tags", href: "/tags" },
-  { name: "About", href: "/about" },
+  { name: "HOME", href: "/" },
+  { name: "TAGS", href: "/tags" },
+  { name: "ABOUT", href: "/about" },
 ];
 
 export function MobileNav() {
@@ -26,25 +26,25 @@ export function MobileNav() {
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <Button variant="ghost" size="icon" className="md:hidden">
+        <Button variant="ghost" size="icon" className="md:hidden rounded-none">
           <Menu className="h-5 w-5" />
           <span className="sr-only">Toggle Menu</span>
         </Button>
       </SheetTrigger>
-      <SheetContent side="right">
-        <SheetTitle className="text-left font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent mb-6">
-          MD BLOG
+      <SheetContent side="right" className="rounded-none border-l">
+        <SheetTitle className="text-left font-serif font-black uppercase tracking-[0.1em] text-foreground mb-10 pt-4 px-2">
+          MD BLOG.
         </SheetTitle>
-        <nav className="flex flex-col gap-4">
+        <nav className="flex flex-col gap-6 px-2">
           {NAV_ITEMS.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               onClick={() => setOpen(false)}
               className={cn(
-                "text-lg font-medium transition-colors hover:text-primary",
+                "text-sm font-black uppercase tracking-[0.2em] transition-colors hover:text-primary",
                 pathname === item.href
-                  ? "text-foreground"
+                  ? "text-foreground underline underline-offset-8"
                   : "text-muted-foreground",
               )}
             >

@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Lora, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const lora = Lora({
+  variable: "--font-serif",
   subsets: ["latin"],
 });
 
@@ -39,7 +39,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased selection:bg-primary/20`}
+        className={`${lora.variable} ${geistMono.variable} font-serif antialiased selection:bg-primary/20`}
       >
         <ThemeProvider
           attribute="class"
@@ -50,7 +50,7 @@ export default function RootLayout({
           <div className="relative min-h-screen flex flex-col">
             <Header />
             <main className="flex-1">{children}</main>
-            <footer className="py-12 border-t text-center text-sm text-muted-foreground">
+            <footer className="py-12 border-t text-center text-sm text-muted-foreground font-serif">
               © {new Date().getFullYear()} Markdown Blog. All rights reserved.
             </footer>
           </div>

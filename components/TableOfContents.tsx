@@ -45,7 +45,7 @@ export function TableOfContents() {
 
   return (
     <nav className="space-y-2">
-      <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground/60 mb-4">
+      <p className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground/60 mb-4">
         On this page
       </p>
       <ul className="space-y-2 text-sm">
