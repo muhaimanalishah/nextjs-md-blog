@@ -31,6 +31,8 @@ export function PostCard({ post, layout = "list" }: PostCardProps) {
 
         <div className="flex-1 flex flex-col justify-center min-w-0">
           <div className="flex items-center gap-2 text-[10px] text-muted-foreground font-sans font-bold uppercase tracking-widest mb-2">
+            <span>{post.metadata.author}</span>
+            <span className="text-muted-foreground/30">·</span>
             <time dateTime={post.metadata.date}>
               {new Date(post.metadata.date).toLocaleDateString("en-US", {
                 month: "short",
@@ -86,6 +88,8 @@ export function PostCard({ post, layout = "list" }: PostCardProps) {
 
       <div className="flex flex-col flex-1 p-5">
         <div className="flex items-center gap-2 text-[10px] text-muted-foreground font-sans font-bold uppercase tracking-widest mb-3">
+          <span>{post.metadata.author}</span>
+          <span className="text-muted-foreground/30">·</span>
           <time dateTime={post.metadata.date}>
             {new Date(post.metadata.date).toLocaleDateString("en-US", {
               day: "numeric",

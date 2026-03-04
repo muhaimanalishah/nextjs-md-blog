@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Post } from "@/lib/posts";
-import { TagBadge } from "./TagBadge";
 
 interface RelatedPostsProps {
   posts: Post[];
@@ -42,19 +41,29 @@ export function RelatedPosts({ posts }: RelatedPostsProps) {
               <div className="flex flex-col gap-2 p-4 border-t border-border/40">
                 <div className="flex flex-wrap gap-1.5">
                   {post.metadata.tags.slice(0, 2).map((tag) => (
-                    <TagBadge key={tag} tag={tag} />
+                    <span
+                      key={tag}
+                      className="inline-flex items-center gap-1 px-2 py-1 text-xs bg-secondary text-secondary-foreground rounded-none"
+                    >
+                      <span>#</span>
+                      <span className="capitalize">{tag}</span>
+                    </span>
                   ))}
                 </div>
                 <h3 className="text-base font-serif font-black tracking-tight leading-snug group-hover:text-primary transition-colors line-clamp-2">
                   {post.metadata.title}.
                 </h3>
-                <p className="text-xs text-muted-foreground/60 font-sans font-bold uppercase tracking-widest">
-                  {new Date(post.metadata.date).toLocaleDateString("en-US", {
-                    month: "short",
-                    day: "numeric",
-                    year: "numeric",
-                  })}
-                </p>
+                <div className="flex items-center gap-2 text-[10px] font-sans font-bold uppercase tracking-widest text-muted-foreground/60">
+                  <span>{post.metadata.author}</span>
+                  <span className="text-muted-foreground/30">·</span>
+                  <time dateTime={post.metadata.date}>
+                    {new Date(post.metadata.date).toLocaleDateString("en-US", {
+                      month: "short",
+                      day: "numeric",
+                      year: "numeric",
+                    })}
+                  </time>
+                </div>
               </div>
             </Link>
           );
