@@ -1,5 +1,11 @@
-import dynamic from "next/dynamic";
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
 import { Metadata } from "next";
+import { MDXRemote } from "next-mdx-remote/rsc";
+import remarkGfm from "remark-gfm";
+import rehypeHighlight from "rehype-highlight";
+import rehypeSlug from "rehype-slug";
 
 export const metadata: Metadata = {
   title: "About",
@@ -7,7 +13,9 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
-  const Content = dynamic(() => import("@/content/about.mdx"));
+  const filePath = path.join(process.cwd(), "content/about.mdx");
+  const raw = fs.readFileSync(filePath, "utf8");
+  const { content } = matter(raw);
 
   return (
     <div className="container max-w-3xl py-12 md:py-24 animate-in fade-in slide-in-from-bottom-4 duration-1000">
@@ -21,7 +29,15 @@ export default function AboutPage() {
       </div>
 
       <div className="prose prose-zinc dark:prose-invert prose-lg md:prose-xl max-w-none font-serif leading-relaxed">
-        <Content />
+        <MDXRemote
+          source={content}
+          options={{
+            mdxOptions: {
+              remarkPlugins: [remarkGfm],
+              rehypePlugins: [rehypeHighlight, rehypeSlug],
+            },
+          }}
+        />
       </div>
     </div>
   );

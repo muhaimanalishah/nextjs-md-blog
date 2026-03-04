@@ -12,7 +12,7 @@ interface PostCardProps {
 
 export function PostCard({ post, layout = "list" }: PostCardProps) {
   const coverUrl = post.metadata.cover
-    ? `/api/posts/${post.folder}/${post.metadata.cover.replace(/^\.\//, "")}`
+    ? `/posts/${post.folder}/${post.metadata.cover.replace(/^\.\//, "")}`
     : null;
 
   if (layout === "list") {

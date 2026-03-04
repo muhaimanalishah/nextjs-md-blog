@@ -11,7 +11,7 @@ interface PostHeaderProps {
 
 export function PostHeader({ post, isUrdu = false }: PostHeaderProps) {
   const coverUrl = post.metadata.cover
-    ? `/api/posts/${post.folder}/${post.metadata.cover}`
+    ? `/posts/${post.folder}/${post.metadata.cover.replace(/^\.\//, "")}`
     : null;
 
   return (

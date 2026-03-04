@@ -25,12 +25,8 @@ export function InfinitePostList({ initialPosts, tag }: InfinitePostListProps) {
 
     setLoading(true);
     try {
-      const url = new URL("/api/posts", window.location.origin);
-      url.searchParams.set("page", page.toString());
-      url.searchParams.set("limit", "10");
-      if (tag) url.searchParams.set("tag", tag);
-
-      const res = await fetch(url.toString());
+      const prefix = tag ? `posts-${tag}` : "posts";
+      const res = await fetch(`/api/${prefix}-${page}.json`);
       if (!res.ok) throw new Error("Failed to fetch posts");
 
       const data = await res.json();
@@ -42,7 +38,7 @@ export function InfinitePostList({ initialPosts, tag }: InfinitePostListProps) {
     } finally {
       setLoading(false);
     }
-  }, [page, tag, loading, hasMore]);
+  }, [loading, hasMore, tag, page]);
 
   React.useEffect(() => {
     const observer = new IntersectionObserver(

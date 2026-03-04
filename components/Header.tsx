@@ -25,7 +25,7 @@ export function Header() {
               key={item.href}
               href={item.href}
               className={cn(
-                "text-[11px] font-sans tracking-[0.2em] transition-colors hover:text-primary",
+                "text-[12px] font-sans tracking-[0.2em] transition-colors hover:text-primary",
                 pathname === item.href
                   ? "text-foreground font-bold"
                   : "text-muted-foreground",
@@ -39,7 +39,7 @@ export function Header() {
         {/* Center: Logo */}
         <div className="flex-none flex items-center justify-center">
           <Link href="/" className="flex items-center space-x-2">
-            <span className="text-2xl font-serif font-black uppercase tracking-[0.1em] text-foreground">
+            <span className="md:text-2xl font-serif font-black uppercase tracking-widest text-foreground text-xl">
               MD BLOG.
             </span>
           </Link>

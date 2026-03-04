@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { cache } from "react";
 
 export interface PostMetadata {
   title: string;
@@ -32,7 +33,7 @@ function calculateReadingTime(text: string): number {
   return Math.max(1, Math.ceil(words / 200));
 }
 
-export async function getAllPosts(): Promise<Post[]> {
+export const getAllPosts = cache(async (): Promise<Post[]> => {
   if (!fs.existsSync(postsDirectory)) return [];
 
   const folders = fs.readdirSync(postsDirectory).filter((file) => {
@@ -79,7 +80,7 @@ export async function getAllPosts(): Promise<Post[]> {
     (a, b) =>
       new Date(b.metadata.date).getTime() - new Date(a.metadata.date).getTime(),
   );
-}
+});
 
 export async function getPostContent(folder: string, lang: "en" | "ur" = "en"): Promise<string> {
   const filePath = path.join(postsDirectory, folder, `${lang}.mdx`);
