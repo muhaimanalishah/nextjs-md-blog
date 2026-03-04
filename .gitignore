@@ -41,4 +41,6 @@ yarn-error.log*
 next-env.d.ts
 
 # custom
-public/posts/*
+public/posts/
+public/api/
+public/feed.xml
