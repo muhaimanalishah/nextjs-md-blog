@@ -8,9 +8,9 @@ interface ReadingTimeProps {
 export function ReadingTime({ minutes, className }: ReadingTimeProps) {
   return (
     <div
-      className={`flex items-center font-sans text-muted-foreground gap-1.5 ${className}`}
+      className={`flex items-center font-sans text-[10px] font-bold uppercase tracking-widest text-muted-foreground gap-1.5 ${className}`}
     >
-      <Clock className="w-4 h-4" />
+      <Clock className="w-3 h-3" />
       <span>{minutes} min read</span>
     </div>
   );

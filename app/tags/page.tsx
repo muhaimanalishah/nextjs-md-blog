@@ -24,7 +24,7 @@ export default async function TagsPage() {
   return (
     <div className="container max-w-4xl py-12 md:py-24">
       <div className="flex flex-col gap-4 mb-12 text-center">
-        <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl">
+        <h1 className="text-4xl lg:text-5xl font-serif font-black tracking-tight">
           Browse by Tags
         </h1>
         <p className="text-xl text-muted-foreground">
@@ -37,7 +37,7 @@ export default async function TagsPage() {
           <Link key={tag} href={`/tags/${tag}`}>
             <Badge
               variant="secondary"
-              className="text-lg py-2 px-4 gap-2 hover:bg-primary hover:text-primary-foreground transition-colors cursor-pointer"
+              className="text-lg py-2 px-4 gap-2 hover:bg-primary hover:text-primary-foreground transition-colors cursor-pointer rounded-none"
             >
               {tag}{" "}
               <span className="text-muted-foreground text-sm font-normal">

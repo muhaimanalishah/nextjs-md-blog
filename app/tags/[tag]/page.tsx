@@ -44,7 +44,7 @@ export default async function TagPage({ params }: TagPageProps) {
           <span className="text-muted-foreground">Tagged with:</span>
           <TagBadge tag={tag} />
         </div>
-        <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl capitalize">
+        <h1 className="text-4xl lg:text-5xl font-serif font-black tracking-tight capitalize">
           {tag}
         </h1>
         <p className="text-xl text-muted-foreground">
