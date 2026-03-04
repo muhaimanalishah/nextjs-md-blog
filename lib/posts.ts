@@ -4,24 +4,25 @@ import matter from "gray-matter";
 
 export interface PostMetadata {
   title: string;
-  titleUrdu?: string;
   date: string;
   tags: string[];
   excerpt: string;
   cover?: string;
+  author: string;
+}
+
+export interface UrduMetadata {
+  title?: string;
+  excerpt?: string;
 }
 
 export interface Post {
   slug: string;
   folder: string;
   metadata: PostMetadata;
+  urMetadata: UrduMetadata;
   hasUrdu: boolean;
   readingTime: number;
-}
-
-export interface SinglePost extends Post {
-  older: Post | null;
-  newer: Post | null;
 }
 
 const postsDirectory = path.join(process.cwd(), "content/posts");
@@ -51,7 +52,16 @@ export async function getAllPosts(): Promise<Post[]> {
     const hasUrdu = fs.existsSync(urMdxPath);
     const readingTime = calculateReadingTime(content);
 
-    // Strip date prefix: YYYY-MM-DD-slug
+    let urMetadata: UrduMetadata = {};
+    if (hasUrdu) {
+      const urContent = fs.readFileSync(urMdxPath, "utf8");
+      const { data } = matter(urContent);
+      urMetadata = {
+        title: data.title,
+        excerpt: data.excerpt,
+      };
+    }
+
     const nameMatch = folder.match(/^\d{4}-\d{2}-\d{2}-(.*)$/);
     const slug = nameMatch ? nameMatch[1] : folder;
 
@@ -59,39 +69,45 @@ export async function getAllPosts(): Promise<Post[]> {
       slug,
       folder,
       metadata: metadata as PostMetadata,
+      urMetadata,
       hasUrdu,
       readingTime,
     };
   });
 
-  // Sort by date descending
   return posts.sort(
     (a, b) =>
       new Date(b.metadata.date).getTime() - new Date(a.metadata.date).getTime(),
   );
 }
 
-export async function getPostBySlug(slug: string): Promise<SinglePost | null> {
+export async function getPostBySlug(slug: string): Promise<Post | null> {
   const allPosts = await getAllPosts();
-  const index = allPosts.findIndex((p) => p.slug === slug);
-
-  if (index === -1) return null;
-
-  const post = allPosts[index];
-
-  // Previous post is index + 1 (older), Next post is index - 1 (newer)
-  // because the list is sorted descending
-  const older = index < allPosts.length - 1 ? allPosts[index + 1] : null;
-  const newer = index > 0 ? allPosts[index - 1] : null;
-
-  return {
-    ...post,
-    older,
-    newer,
-  };
+  return allPosts.find((p) => p.slug === slug) ?? null;
 }
 
 export async function getPostsByTag(tag: string): Promise<Post[]> {
   const allPosts = await getAllPosts();
   return allPosts.filter((post) => post.metadata.tags.includes(tag));
+}
+
+export async function getRelatedPosts(post: Post, count = 3): Promise<Post[]> {
+  const allPosts = await getAllPosts();
+
+  return allPosts
+    .filter((p) => p.slug !== post.slug)
+    .map((p) => ({
+      post: p,
+      score: p.metadata.tags.filter((t) => post.metadata.tags.includes(t))
+        .length,
+    }))
+    .filter(({ score }) => score > 0)
+    .sort((a, b) =>
+      b.score !== a.score
+        ? b.score - a.score
+        : new Date(b.post.metadata.date).getTime() -
+          new Date(a.post.metadata.date).getTime(),
+    )
+    .slice(0, count)
+    .map(({ post }) => post);
 }
