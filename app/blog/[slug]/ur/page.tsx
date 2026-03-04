@@ -5,6 +5,7 @@ import { Metadata } from "next";
 import { TableOfContents } from "@/components/TableOfContents";
 import { PostHeader } from "@/components/PostHeader";
 import { RelatedPosts } from "@/components/RelatedPosts";
+import { ShareButtons } from "@/components/ShareButtons";
 
 interface PostPageProps {
   params: Promise<{ slug: string }>;
@@ -57,6 +58,7 @@ export default async function UrduPostPage({ params }: PostPageProps) {
             <Content />
           </div>
 
+          <ShareButtons title={post.metadata.title} slug={post.slug} />
           <RelatedPosts posts={related} />
         </article>
 
