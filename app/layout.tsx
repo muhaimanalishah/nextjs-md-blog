@@ -21,10 +21,10 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
 export const metadata: Metadata = {
   title: {
-    default: "Markdown Blog",
-    template: "%s | Markdown Blog",
+    default: "miloadev",
+    template: "%s - miloasdev",
   },
-  description: "A bilingual blog built with Next.js, MDX, and Tailwind CSS.",
+  description: "Muhaiman Ali Shah. Writing about what I build and learn.",
   metadataBase: new URL(SITE_URL),
   alternates: {
     types: {
@@ -56,7 +56,7 @@ export default function RootLayout({
             <Header />
             <main className="flex-1">{children}</main>
             <footer className="text-muted-foreground border-t py-12 text-center font-sans text-sm">
-              © {new Date().getFullYear()} Markdown Blog. All rights reserved.
+              © {new Date().getFullYear()} Muhaiman Ali Shah.
             </footer>
           </div>
         </ThemeProvider>

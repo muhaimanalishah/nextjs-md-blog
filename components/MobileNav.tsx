@@ -14,8 +14,8 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const NAV_ITEMS = [
-  { name: "HOME", href: "/" },
-  { name: "TAGS", href: "/tags" },
+  { name: "WRITING", href: "/" },
+  { name: "TOPICS", href: "/tags" },
   { name: "ABOUT", href: "/about" },
 ];
 
@@ -33,7 +33,7 @@ export function MobileNav() {
       </SheetTrigger>
       <SheetContent side="right" className="rounded-none border-l">
         <SheetTitle className="text-foreground mb-10 px-2 pt-4 text-left font-serif font-black tracking-[0.1em] uppercase">
-          MD BLOG.
+          miloasdev.
         </SheetTitle>
         <nav className="flex flex-col gap-6 px-2">
           {NAV_ITEMS.map((item) => (
