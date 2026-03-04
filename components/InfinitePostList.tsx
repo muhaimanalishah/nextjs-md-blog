@@ -4,7 +4,6 @@ import * as React from "react";
 import { Post } from "@/lib/posts";
 import { PostCard } from "./PostCard";
 import { Loader2, LayoutGrid, List as ListIcon } from "lucide-react";
-import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -18,7 +17,7 @@ export function InfinitePostList({ initialPosts, tag }: InfinitePostListProps) {
   const [page, setPage] = React.useState(2);
   const [loading, setLoading] = React.useState(false);
   const [hasMore, setHasMore] = React.useState(initialPosts.length >= 10);
-  const [layout, setLayout] = React.useState<"list" | "grid">("list");
+  const [layout, setLayout] = React.useState<"list" | "grid">("grid");
   const observerTarget = React.useRef<HTMLDivElement>(null);
 
   const fetchMorePosts = React.useCallback(async () => {
@@ -29,15 +28,12 @@ export function InfinitePostList({ initialPosts, tag }: InfinitePostListProps) {
       const url = new URL("/api/posts", window.location.origin);
       url.searchParams.set("page", page.toString());
       url.searchParams.set("limit", "10");
-      if (tag) {
-        url.searchParams.set("tag", tag);
-      }
+      if (tag) url.searchParams.set("tag", tag);
 
       const res = await fetch(url.toString());
       if (!res.ok) throw new Error("Failed to fetch posts");
 
       const data = await res.json();
-
       setPosts((prev) => [...prev, ...data.posts]);
       setHasMore(data.hasMore);
       setPage((prev) => prev + 1);
@@ -58,44 +54,43 @@ export function InfinitePostList({ initialPosts, tag }: InfinitePostListProps) {
       { threshold: 1.0 },
     );
 
-    if (observerTarget.current) {
-      observer.observe(observerTarget.current);
-    }
-
+    if (observerTarget.current) observer.observe(observerTarget.current);
     return () => observer.disconnect();
   }, [fetchMorePosts, hasMore, loading]);
 
   return (
     <div className="flex flex-col gap-10">
-      <div className="flex items-center justify-between border-b border-border pb-6">
-        <span className="text-[10px] font-sans font-bold uppercase tracking-[0.3em] text-muted-foreground/60">
-          Viewing {posts.length} {posts.length === 1 ? "Post" : "Posts"}
+      {/* Toolbar */}
+      <div className="flex items-center justify-between border-b border-border pb-4">
+        <span className="text-[10px] font-sans font-bold uppercase tracking-[0.3em] text-muted-foreground">
+          {posts.length} {posts.length === 1 ? "Post" : "Posts"}
         </span>
 
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => setLayout("list")}
-            className={cn(
-              "flex items-center gap-2 px-3 py-1.5 transition-all text-[10px] font-sans font-bold uppercase tracking-widest",
-              layout === "list"
-                ? "bg-foreground text-background"
-                : "text-muted-foreground hover:text-foreground",
-            )}
-          >
-            <ListIcon className="h-3 w-3" />
-            <span>Compact</span>
-          </button>
+        {/* Hidden on mobile — grid = list on small screens anyway */}
+        <div className="hidden sm:flex items-center border border-border">
           <button
             onClick={() => setLayout("grid")}
             className={cn(
-              "flex items-center gap-2 px-3 py-1.5 transition-all text-[10px] font-sans font-bold uppercase tracking-widest",
+              "flex items-center gap-1.5 px-3 py-1.5 text-[10px] font-sans font-bold uppercase tracking-widest transition-all",
               layout === "grid"
                 ? "bg-foreground text-background"
-                : "text-muted-foreground hover:text-foreground",
+                : "text-muted-foreground hover:text-foreground hover:bg-accent/30",
             )}
           >
             <LayoutGrid className="h-3 w-3" />
-            <span>Grid</span>
+            Grid
+          </button>
+          <button
+            onClick={() => setLayout("list")}
+            className={cn(
+              "flex items-center gap-1.5 px-3 py-1.5 text-[10px] font-sans font-bold uppercase tracking-widest transition-all",
+              layout === "list"
+                ? "bg-foreground text-background"
+                : "text-muted-foreground hover:text-foreground hover:bg-accent/30",
+            )}
+          >
+            <ListIcon className="h-3 w-3" />
+            List
           </button>
         </div>
       </div>
@@ -103,9 +98,9 @@ export function InfinitePostList({ initialPosts, tag }: InfinitePostListProps) {
       <motion.div
         layout
         className={cn(
-          "grid gap-6 md:gap-10",
+          "grid gap-6 md:gap-8",
           layout === "grid"
-            ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+            ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
             : "grid-cols-1",
         )}
       >
@@ -127,7 +122,7 @@ export function InfinitePostList({ initialPosts, tag }: InfinitePostListProps) {
 
       <div
         ref={observerTarget}
-        className="pt-8 flex flex-col items-center justify-center text-sm text-muted-foreground w-full"
+        className="pt-4 flex flex-col items-center justify-center w-full"
       >
         {loading && (
           <div className="flex items-center gap-2 py-8">
@@ -140,7 +135,7 @@ export function InfinitePostList({ initialPosts, tag }: InfinitePostListProps) {
         {!hasMore && posts.length > 0 && (
           <div className="flex items-center gap-4 w-full py-12">
             <div className="h-px flex-1 bg-border/50" />
-            <span className="text-[10px] font-sans font-bold uppercase tracking-[0.3em] text-muted-foreground/30 whitespace-nowrap">
+            <span className="text-[10px] font-sans font-bold uppercase tracking-[0.3em] text-muted-foreground/40 whitespace-nowrap">
               End of List
             </span>
             <div className="h-px flex-1 bg-border/50" />

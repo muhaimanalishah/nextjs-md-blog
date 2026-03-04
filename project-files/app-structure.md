@@ -1,0 +1,40 @@
+app/
+	globals.css
+	layout.tsx
+	not-found.tsx
+	page.tsx
+	about/
+		page.tsx
+	api/
+		posts/
+			route.ts
+			[folder]/
+				[file]/
+					route.ts
+	blog/
+		[slug]/
+			page.tsx
+			ur/
+				page.tsx
+	feed.xml/
+		route.ts
+	robots.txt/
+		route.ts
+	sitemap.xml/
+		route.ts
+	tags/
+		page.tsx
+		[tag]/
+			page.tsx
+
+content/
+	about.mdx
+	posts/
+		2026-03-01-welcome-to-my-blog/
+			en.mdx
+			ur.mdx
+		2026-03-02-nextjs-v16-features/
+			en.mdx
+		2026-03-03-bilingual-blogging/
+			en.mdx
+			ur.mdx
