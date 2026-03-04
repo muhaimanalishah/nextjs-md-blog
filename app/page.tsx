@@ -18,7 +18,7 @@ export default async function Home() {
         <div className="container max-w-6xl mx-auto px-6">
           <div className="flex flex-col md:flex-row items-end justify-between gap-12">
             <div className="space-y-6 max-w-3xl">
-              <h1 className="text-6xl md:text-8xl lg:text-[7rem] font-serif tracking-tighter leading-[0.9] text-foreground">
+              <h1 className="text-6xl md:text-8xl lg:text-[7rem] font-serif tracking-tighter leading-[0.95] text-foreground">
                 Write Once.
                 <br />
                 <span className="text-muted-foreground italic font-light">
@@ -27,7 +27,7 @@ export default async function Home() {
               </h1>
             </div>
             <div className="flex flex-col items-start md:items-end gap-6 max-w-sm text-left md:text-right">
-              <p className="text-base text-muted-foreground font-medium leading-relaxed">
+              <p className="text-sm text-muted-foreground/70 font-sans leading-relaxed tracking-wide">
                 Exploring the latest in web development, bilingual architecture,
                 and the future of modular content creation.
               </p>
@@ -40,7 +40,7 @@ export default async function Home() {
         </div>
       </section>
 
-      <div className="container max-w-6xl mx-auto px-6 py-16 md:py-24">
+      <div className="container max-w-6xl mx-auto px-6 py-16 md:py-24 border-t border-border">
         <InfinitePostList initialPosts={initialPosts} />
       </div>
     </div>

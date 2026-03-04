@@ -1,9 +1,10 @@
-import { getPostBySlug, getAllPosts } from "@/lib/posts";
+import { getPostBySlug, getAllPosts, getRelatedPosts } from "@/lib/posts";
 import { notFound } from "next/navigation";
 import dynamic from "next/dynamic";
 import { Metadata } from "next";
-import { PostNavigation } from "@/components/PostNavigation";
-import { LangToggle } from "@/components/LangToggle";
+import { TableOfContents } from "@/components/TableOfContents";
+import { PostHeader } from "@/components/PostHeader";
+import { RelatedPosts } from "@/components/RelatedPosts";
 
 interface PostPageProps {
   params: Promise<{ slug: string }>;
@@ -11,7 +12,6 @@ interface PostPageProps {
 
 export async function generateStaticParams() {
   const posts = await getAllPosts();
-  // Only generate routes for posts that have an Urdu version
   return posts
     .filter((post) => post.hasUrdu)
     .map((post) => ({
@@ -26,29 +26,23 @@ export async function generateMetadata({
   const post = await getPostBySlug(slug);
 
   if (!post || !post.hasUrdu) {
-    return {
-      title: "Post Not Found",
-    };
+    return { title: "Post Not Found" };
   }
 
   return {
-    title: post.metadata.titleUrdu || `${post.metadata.title} (Roman Urdu)`,
-    description: post.metadata.excerpt,
+    title: post.urMetadata.title || `${post.metadata.title} (Roman Urdu)`,
+    description: post.urMetadata.excerpt || post.metadata.excerpt,
   };
 }
-
-import { TableOfContents } from "@/components/TableOfContents";
-import { PostHeader } from "@/components/PostHeader";
 
 export default async function UrduPostPage({ params }: PostPageProps) {
   const { slug } = await params;
   const post = await getPostBySlug(slug);
 
-  if (!post || !post.hasUrdu) {
-    notFound();
-  }
+  if (!post || !post.hasUrdu) notFound();
 
-  // Dynamically import the Roman Urdu MDX content
+  const related = await getRelatedPosts(post);
+
   const Content = dynamic(
     () => import(`@/content/posts/${post.folder}/ur.mdx`),
   );
@@ -63,15 +57,11 @@ export default async function UrduPostPage({ params }: PostPageProps) {
             <Content />
           </div>
 
-          <div className="mt-24 pt-12 border-t border-border/50">
-            <PostNavigation older={post.older} newer={post.newer} />
-          </div>
+          <RelatedPosts posts={related} />
         </article>
 
         <aside className="hidden lg:block w-64 shrink-0">
           <div className="sticky top-28 space-y-8">
-            <div className="h-px w-full bg-border/50" />
-            <div className="h-px w-full bg-border/50" />
             <TableOfContents />
           </div>
         </aside>

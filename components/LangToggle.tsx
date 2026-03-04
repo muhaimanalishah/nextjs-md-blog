@@ -24,7 +24,7 @@ export function LangToggle({ hasUrdu }: LangToggleProps) {
       variant="outline"
       size="sm"
       asChild
-      className="gap-2 rounded-none px-4 border-primary/20 hover:bg-primary/5"
+      className="gap-2 rounded-none px-4 border-primary/20 hover:bg-primary/5 w-full sm:w-auto"
     >
       <Link href={toggleHref}>
         <Languages className="w-4 h-4" />

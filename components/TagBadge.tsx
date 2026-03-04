@@ -11,7 +11,7 @@ export function TagBadge({ tag, count }: TagBadgeProps) {
     <Link href={`/tags/${tag}`}>
       <Badge
         variant="secondary"
-        className="hover:bg-primary hover:text-primary-foreground transition-all cursor-pointer flex items-center gap-1.5 py-1"
+        className="hover:bg-primary hover:text-primary-foreground transition-all cursor-pointer flex items-center gap-1.5 py-1 rounded-none"
       >
         <span>#</span>
         <span className="capitalize">{tag}</span>

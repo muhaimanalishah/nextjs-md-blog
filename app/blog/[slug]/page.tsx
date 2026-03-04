@@ -1,9 +1,10 @@
-import { getPostBySlug, getAllPosts } from "@/lib/posts";
+import { getPostBySlug, getAllPosts, getRelatedPosts } from "@/lib/posts";
 import { notFound } from "next/navigation";
 import dynamic from "next/dynamic";
 import { Metadata } from "next";
-import { PostNavigation } from "@/components/PostNavigation";
-import { LangToggle } from "@/components/LangToggle";
+import { TableOfContents } from "@/components/TableOfContents";
+import { PostHeader } from "@/components/PostHeader";
+import { RelatedPosts } from "@/components/RelatedPosts";
 
 interface PostPageProps {
   params: Promise<{ slug: string }>;
@@ -23,9 +24,7 @@ export async function generateMetadata({
   const post = await getPostBySlug(slug);
 
   if (!post) {
-    return {
-      title: "Post Not Found",
-    };
+    return { title: "Post Not Found" };
   }
 
   return {
@@ -34,18 +33,14 @@ export async function generateMetadata({
   };
 }
 
-import { TableOfContents } from "@/components/TableOfContents";
-import { PostHeader } from "@/components/PostHeader";
-
 export default async function PostPage({ params }: PostPageProps) {
   const { slug } = await params;
   const post = await getPostBySlug(slug);
 
-  if (!post) {
-    notFound();
-  }
+  if (!post) notFound();
 
-  // Dynamically import the MDX content
+  const related = await getRelatedPosts(post);
+
   const Content = dynamic(
     () => import(`@/content/posts/${post.folder}/en.mdx`),
   );
@@ -60,9 +55,7 @@ export default async function PostPage({ params }: PostPageProps) {
             <Content />
           </div>
 
-          <div className="mt-24 pt-12 border-t border-border/50">
-            <PostNavigation older={post.older} newer={post.newer} />
-          </div>
+          <RelatedPosts posts={related} />
         </article>
 
         <aside className="hidden lg:block w-64 shrink-0">
