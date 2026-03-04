@@ -2,8 +2,7 @@ import type { MDXComponents } from "mdx/types";
 import Image from "next/image";
 import Link from "next/link";
 import { ComponentPropsWithoutRef } from "react";
-
-import { CopyCodeButton } from "@/components/CopyCodeButton";
+import { PreWithCopy } from "./components/PreWithCopy";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -76,27 +75,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       }
       return <figcaption {...props} />;
     },
-    pre: ({
-      children,
-      className,
-      ...props
-    }: ComponentPropsWithoutRef<"pre">) => {
-      return (
-        <div className="relative">
-          <pre
-            {...props}
-            className={`overflow-x-auto p-4 py-6 text-sm leading-relaxed ${className || ""}`}
-          >
-            {children}
-          </pre>
-          <div className="absolute right-2 top-2 z-10 transition-opacity md:opacity-0 md:group-hover:opacity-100">
-            <CopyCodeButton
-              // If rehype-pretty-code is configured properly we can extract text, but for now we fallback
-              code={((props as Record<string, unknown>)?.raw as string) || ""}
-            />
-          </div>
-        </div>
-      );
+    pre: (props) => <PreWithCopy {...props} />,
+    code: (props: ComponentPropsWithoutRef<"code">) => {
+      return <code {...props} />;
     },
   };
 }

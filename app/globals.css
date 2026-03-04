@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
+@import 'highlight.js/styles/github.css';
 
 @plugin "@tailwindcss/typography";
 
@@ -144,44 +145,40 @@
   }
 }
 
-/* Syntax Highlighting */
-code {
-  @apply rounded bg-muted px-1 py-0.5 font-mono text-sm;
-}
-
+/* Code blocks */
 pre {
-  @apply my-6 overflow-x-auto rounded-lg border bg-muted p-4 font-mono text-sm leading-relaxed;
+  @apply my-6 overflow-x-auto border-0 p-4 bg-muted font-mono text-sm leading-relaxed;
 }
 
 pre code {
-  @apply block bg-transparent p-0 text-inherit;
+  @apply block bg-muted p-0;
   display: grid;
 }
 
-code[data-line-numbers] {
-  counter-reset: line;
+:not(pre) > code {
+  @apply rounded-none bg-muted px-1 py-0.5 font-mono text-sm;
+  color: #cf222e;
 }
 
-code[data-line-numbers] > span[data-line]::before {
-  counter-increment: line;
-  content: counter(line);
-  @apply mr-4 inline-block w-4 text-right text-muted-foreground/50;
+.dark :not(pre) > code {
+  color: #ff7b72;
 }
 
-[data-highlighted-line],
-[data-highlighted-chars] {
-  @apply -mx-4 border-l-4 border-primary bg-primary/10 px-4;
+.hljs {
+  background: transparent !important;
 }
 
-/* Shiki Dual Theme */
-[data-rehype-pretty-code-figure] pre {
-  @apply bg-zinc-950 dark:bg-zinc-900;
+.dark pre {
+  @apply bg-muted;
 }
 
-[data-rehype-pretty-code-title] {
-  @apply mt-6 rounded-t-lg border border-b-0 bg-muted px-4 py-2 font-mono text-xs font-medium text-muted-foreground;
-}
-
-[data-rehype-pretty-code-title] + pre {
-  @apply mt-0 rounded-t-none;
-}
+.dark .hljs-keyword { color: #ff7b72; }
+.dark .hljs-title { color: #d2a8ff; }
+.dark .hljs-string { color: #a5d6ff; }
+.dark .hljs-comment { color: #8b949e; }
+.dark .hljs-number { color: #f2cc60; }
+.dark .hljs-built_in { color: #ffa657; }
+.dark .hljs-tag { color: #7ee787; }
+.dark .hljs-attr { color: #79c0ff; }
+.dark .hljs-variable { color: #ffa657; }
+.dark .hljs { color: #e6edf3; background: transparent !important; }

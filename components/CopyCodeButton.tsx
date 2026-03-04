@@ -4,31 +4,23 @@ import * as React from "react";
 import { Check, Copy } from "lucide-react";
 import { Button } from "./ui/button";
 
-interface CopyCodeButtonProps {
-  code: string;
-}
-
-export function CopyCodeButton({ code }: CopyCodeButtonProps) {
+export function CopyCodeButton({ onClick }: { onClick: () => void }) {
   const [copied, setCopied] = React.useState(false);
 
-  const copy = async () => {
-    await navigator.clipboard.writeText(code);
+  const handleClick = () => {
+    onClick();
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
   return (
     <Button
-      size="icon-xs"
+      size="icon"
       variant="ghost"
-      onClick={copy}
-      className="absolute right-3 top-3 h-8 w-8 text-muted-foreground/50 hover:bg-muted/50 hover:text-foreground"
+      onClick={handleClick}
+      className="h-7 w-7 text-muted-foreground hover:text-foreground"
     >
-      {copied ? (
-        <Check className="h-4 w-4 text-green-500" />
-      ) : (
-        <Copy className="h-4 w-4" />
-      )}
+      {copied ? <Check className="h-3.5 w-3.5 text-green-500" /> : <Copy className="h-3.5 w-3.5" />}
       <span className="sr-only">Copy code</span>
     </Button>
   );

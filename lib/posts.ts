@@ -81,6 +81,14 @@ export async function getAllPosts(): Promise<Post[]> {
   );
 }
 
+export async function getPostContent(folder: string, lang: "en" | "ur" = "en"): Promise<string> {
+  const filePath = path.join(postsDirectory, folder, `${lang}.mdx`);
+  if (!fs.existsSync(filePath)) return "";
+  const raw = fs.readFileSync(filePath, "utf8");
+  const { content } = matter(raw);
+  return content;
+}
+
 export async function getPostBySlug(slug: string): Promise<Post | null> {
   const allPosts = await getAllPosts();
   return allPosts.find((p) => p.slug === slug) ?? null;
