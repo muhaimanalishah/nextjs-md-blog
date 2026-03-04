@@ -16,19 +16,19 @@ export function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-background/80 backdrop-blur-md border-b border-border/40">
-      <div className="flex h-16 md:h-20 items-center justify-between w-full max-w-6xl mx-auto px-6 md:px-12">
+    <header className="bg-background/80 border-border/40 sticky top-0 z-50 w-full border-b backdrop-blur-md">
+      <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-6 md:h-20 md:px-12">
         {/* Left: Navigation Links */}
-        <nav className="hidden md:flex flex-1 items-center gap-6">
+        <nav className="hidden flex-1 items-center gap-6 md:flex">
           {NAV_ITEMS.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               className={cn(
-                "text-[12px] font-sans tracking-[0.2em] transition-colors hover:text-primary",
+                "hover:text-primary font-sans text-[12px] tracking-[0.2em] transition-colors",
                 pathname === item.href
                   ? "text-foreground font-bold"
-                  : "text-muted-foreground",
+                  : "text-muted-foreground"
               )}
             >
               {item.name}
@@ -37,9 +37,9 @@ export function Header() {
         </nav>
 
         {/* Center: Logo */}
-        <div className="flex-none flex items-center justify-center">
+        <div className="flex flex-none items-center justify-center">
           <Link href="/" className="flex items-center space-x-2">
-            <span className="md:text-2xl font-serif font-black uppercase tracking-widest text-foreground text-xl">
+            <span className="text-foreground font-serif text-xl font-black tracking-widest uppercase md:text-2xl">
               MD BLOG.
             </span>
           </Link>

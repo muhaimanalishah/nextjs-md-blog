@@ -26,13 +26,13 @@ export function MobileNav() {
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <Button variant="ghost" size="icon" className="md:hidden rounded-none">
+        <Button variant="ghost" size="icon" className="rounded-none md:hidden">
           <Menu className="h-5 w-5" />
           <span className="sr-only">Toggle Menu</span>
         </Button>
       </SheetTrigger>
       <SheetContent side="right" className="rounded-none border-l">
-        <SheetTitle className="text-left font-serif font-black uppercase tracking-[0.1em] text-foreground mb-10 pt-4 px-2">
+        <SheetTitle className="text-foreground mb-10 px-2 pt-4 text-left font-serif font-black tracking-[0.1em] uppercase">
           MD BLOG.
         </SheetTitle>
         <nav className="flex flex-col gap-6 px-2">
@@ -42,10 +42,10 @@ export function MobileNav() {
               href={item.href}
               onClick={() => setOpen(false)}
               className={cn(
-                "text-sm font-black uppercase tracking-[0.2em] transition-colors hover:text-primary",
+                "hover:text-primary text-sm font-black tracking-[0.2em] uppercase transition-colors",
                 pathname === item.href
                   ? "text-foreground underline underline-offset-8"
-                  : "text-muted-foreground",
+                  : "text-muted-foreground"
               )}
             >
               {item.name}

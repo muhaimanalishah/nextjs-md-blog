@@ -2,10 +2,12 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { Metadata } from "next";
-import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import rehypeSlug from "rehype-slug";
+import { MDXRemote } from "next-mdx-remote/rsc";
+import { PreWithCopy } from "@/components/PreWithCopy";
+import { Callout } from "@/components/Callout";
 
 export const metadata: Metadata = {
   title: "About",
@@ -18,12 +20,12 @@ export default function AboutPage() {
   const { content } = matter(raw);
 
   return (
-    <div className="container max-w-3xl py-12 md:py-24 animate-in fade-in slide-in-from-bottom-4 duration-1000">
-      <div className="flex flex-col gap-4 mb-8">
-        <h1 className="text-4xl lg:text-5xl font-serif font-black tracking-tight">
+    <div className="animate-in fade-in slide-in-from-bottom-4 container max-w-3xl py-12 duration-1000 md:py-24">
+      <div className="mb-8 flex flex-col gap-4">
+        <h1 className="font-serif text-4xl font-black tracking-tight lg:text-5xl">
           About Me
         </h1>
-        <p className="text-lg text-muted-foreground/70 font-sans leading-relaxed">
+        <p className="text-muted-foreground/70 font-sans text-lg leading-relaxed">
           The story behind the Markdown Blog and its creator.
         </p>
       </div>
@@ -37,6 +39,7 @@ export default function AboutPage() {
               rehypePlugins: [rehypeHighlight, rehypeSlug],
             },
           }}
+          components={{ pre: (props) => <PreWithCopy {...props} />, Callout }}
         />
       </div>
     </div>

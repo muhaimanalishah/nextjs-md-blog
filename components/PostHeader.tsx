@@ -15,15 +15,15 @@ export function PostHeader({ post, isUrdu = false }: PostHeaderProps) {
     : null;
 
   return (
-    <header className="mb-12 md:mb-16 max-w-6xl mx-auto">
-      <div className="space-y-6 mb-8">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-black tracking-tight leading-tight text-foreground">
+    <header className="mx-auto mb-12 max-w-6xl md:mb-16">
+      <div className="mb-8 space-y-6">
+        <h1 className="text-foreground font-serif text-4xl leading-tight font-black tracking-tight md:text-5xl lg:text-6xl">
           {isUrdu && post.urMetadata.title
             ? post.urMetadata.title
             : post.metadata.title}
         </h1>
 
-        <div className="flex flex-wrap items-center gap-3 text-[10px] uppercase tracking-[0.2em] font-sans font-bold text-muted-foreground/80">
+        <div className="text-muted-foreground/80 flex flex-wrap items-center gap-3 font-sans text-[10px] font-bold tracking-[0.2em] uppercase">
           <span>{post.metadata.author}</span>
           <span className="text-muted-foreground/30">·</span>
           <time dateTime={post.metadata.date}>
@@ -44,12 +44,12 @@ export function PostHeader({ post, isUrdu = false }: PostHeaderProps) {
         </div>
 
         {post.hasUrdu && (
-          <div className="w-full text-[10px] uppercase tracking-[0.2em] font-sans font-bold text-muted-foreground/80">
+          <div className="text-muted-foreground/80 w-full font-sans text-[10px] font-bold tracking-[0.2em] uppercase">
             <LangToggle hasUrdu={post.hasUrdu} />
           </div>
         )}
 
-        <div className="flex flex-wrap gap-2 pt-4 border-t border-border/50">
+        <div className="border-border/50 flex flex-wrap gap-2 border-t pt-4">
           {post.metadata.tags.map((tag) => (
             <TagBadge key={tag} tag={tag} />
           ))}
@@ -57,7 +57,7 @@ export function PostHeader({ post, isUrdu = false }: PostHeaderProps) {
       </div>
 
       {coverUrl && (
-        <div className="relative w-full aspect-video sm:aspect-21/9 overflow-hidden border border-border">
+        <div className="border-border relative aspect-video w-full overflow-hidden border sm:aspect-21/9">
           <Image
             src={coverUrl}
             alt={post.metadata.title}

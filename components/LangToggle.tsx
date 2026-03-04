@@ -24,11 +24,11 @@ export function LangToggle({ hasUrdu }: LangToggleProps) {
       variant="outline"
       size="sm"
       asChild
-      className="gap-2 rounded-none px-4 border-primary/20 hover:bg-primary/5 w-full sm:w-auto"
+      className="border-primary/20 hover:bg-primary/5 w-full gap-2 rounded-none px-4 sm:w-auto"
     >
       <Link href={toggleHref}>
-        <Languages className="w-4 h-4" />
-        <span className="font-medium text-xs">
+        <Languages className="h-4 w-4" />
+        <span className="text-xs font-medium">
           {isUrdu ? "Switch to English" : "Urdu mein parhain"}
         </span>
       </Link>

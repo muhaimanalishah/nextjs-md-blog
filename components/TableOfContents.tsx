@@ -15,7 +15,7 @@ export function TableOfContents() {
 
   React.useEffect(() => {
     const elements = Array.from(
-      document.querySelectorAll("article h2, article h3"),
+      document.querySelectorAll("article h2, article h3")
     ).map((element) => ({
       id: element.id,
       text: element.textContent?.replace("#", "").trim() || "",
@@ -31,7 +31,7 @@ export function TableOfContents() {
           }
         });
       },
-      { rootMargin: "0% 0% -80% 0%" },
+      { rootMargin: "0% 0% -80% 0%" }
     );
 
     document.querySelectorAll("article h2, article h3").forEach((element) => {
@@ -45,7 +45,7 @@ export function TableOfContents() {
 
   return (
     <nav className="space-y-2">
-      <p className="text-[10px] font-sans font-bold uppercase tracking-[0.3em] text-muted-foreground/60 mb-4">
+      <p className="text-muted-foreground/60 mb-4 font-sans text-[10px] font-bold tracking-[0.3em] uppercase">
         On this page
       </p>
       <ul className="space-y-2 text-sm">
@@ -57,10 +57,10 @@ export function TableOfContents() {
             <a
               href={`#${heading.id}`}
               className={cn(
-                "inline-block py-1 transition-colors hover:text-primary",
+                "hover:text-primary inline-block py-1 transition-colors",
                 activeId === heading.id
                   ? "text-primary font-medium"
-                  : "text-muted-foreground",
+                  : "text-muted-foreground"
               )}
             >
               {heading.text}

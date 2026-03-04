@@ -10,12 +10,12 @@ export function RelatedPosts({ posts }: RelatedPostsProps) {
   if (posts.length === 0) return null;
 
   return (
-    <div className="mt-16 pt-12 border-t border-border/50">
-      <p className="text-[10px] font-sans font-bold uppercase tracking-[0.3em] text-muted-foreground/60 mb-8">
+    <div className="border-border/50 mt-16 border-t pt-12">
+      <p className="text-muted-foreground/60 mb-8 font-sans text-[10px] font-bold tracking-[0.3em] uppercase">
         Related Posts
       </p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {posts.map((post) => {
           const coverUrl = post.metadata.cover
             ? `/posts/${post.folder}/${post.metadata.cover}`
@@ -25,10 +25,10 @@ export function RelatedPosts({ posts }: RelatedPostsProps) {
             <Link
               key={post.slug}
               href={`/blog/${post.slug}`}
-              className="group flex flex-col border border-border hover:border-primary/40 transition-all duration-300"
+              className="group border-border hover:border-primary/40 flex flex-col border transition-all duration-300"
             >
               {coverUrl && (
-                <div className="relative aspect-16/10 w-full overflow-hidden bg-muted">
+                <div className="bg-muted relative aspect-16/10 w-full overflow-hidden">
                   <Image
                     src={coverUrl}
                     alt={post.metadata.title}
@@ -38,22 +38,22 @@ export function RelatedPosts({ posts }: RelatedPostsProps) {
                 </div>
               )}
 
-              <div className="flex flex-col gap-2 p-4 border-t border-border/40">
+              <div className="border-border/40 flex flex-col gap-2 border-t p-4">
                 <div className="flex flex-wrap gap-1.5">
                   {post.metadata.tags.slice(0, 2).map((tag) => (
                     <span
                       key={tag}
-                      className="inline-flex items-center gap-1 px-2 py-1 text-xs bg-secondary text-secondary-foreground rounded-none"
+                      className="bg-secondary text-secondary-foreground inline-flex items-center gap-1 rounded-none px-2 py-1 text-xs"
                     >
                       <span>#</span>
                       <span className="capitalize">{tag}</span>
                     </span>
                   ))}
                 </div>
-                <h3 className="text-base font-serif font-black tracking-tight leading-snug group-hover:text-primary transition-colors line-clamp-2">
+                <h3 className="group-hover:text-primary line-clamp-2 font-serif text-base leading-snug font-black tracking-tight transition-colors">
                   {post.metadata.title}.
                 </h3>
-                <div className="flex items-center gap-2 text-[10px] font-sans font-bold uppercase tracking-widest text-muted-foreground/60">
+                <div className="text-muted-foreground/60 flex items-center gap-2 font-sans text-[10px] font-bold tracking-widest uppercase">
                   <span>{post.metadata.author}</span>
                   <span className="text-muted-foreground/30">·</span>
                   <time dateTime={post.metadata.date}>

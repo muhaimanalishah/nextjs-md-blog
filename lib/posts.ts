@@ -78,11 +78,14 @@ export const getAllPosts = cache(async (): Promise<Post[]> => {
 
   return posts.sort(
     (a, b) =>
-      new Date(b.metadata.date).getTime() - new Date(a.metadata.date).getTime(),
+      new Date(b.metadata.date).getTime() - new Date(a.metadata.date).getTime()
   );
 });
 
-export async function getPostContent(folder: string, lang: "en" | "ur" = "en"): Promise<string> {
+export async function getPostContent(
+  folder: string,
+  lang: "en" | "ur" = "en"
+): Promise<string> {
   const filePath = path.join(postsDirectory, folder, `${lang}.mdx`);
   if (!fs.existsSync(filePath)) return "";
   const raw = fs.readFileSync(filePath, "utf8");
@@ -115,7 +118,7 @@ export async function getRelatedPosts(post: Post, count = 3): Promise<Post[]> {
       b.score !== a.score
         ? b.score - a.score
         : new Date(b.post.metadata.date).getTime() -
-          new Date(a.post.metadata.date).getTime(),
+          new Date(a.post.metadata.date).getTime()
     )
     .slice(0, count)
     .map(({ post }) => post);

@@ -38,20 +38,20 @@ export function ShareButtons({ title, slug }: ShareButtonsProps) {
   const handleX = () => {
     window.open(
       `https://x.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`,
-      "_blank",
+      "_blank"
     );
   };
 
   const handleWhatsApp = () => {
     window.open(
       `https://wa.me/?text=${encodeURIComponent(`${title} ${url}`)}`,
-      "_blank",
+      "_blank"
     );
   };
 
   return (
-    <div className="flex items-center font-sans gap-3 py-8 border-t border-border/50">
-      <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground/60 mr-2">
+    <div className="border-border/50 flex items-center gap-3 border-t py-8 font-sans">
+      <span className="text-muted-foreground/60 mr-2 text-[10px] font-bold tracking-[0.3em] uppercase">
         Share
       </span>
 

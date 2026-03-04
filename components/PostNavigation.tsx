@@ -11,18 +11,18 @@ export function PostNavigation({ older, newer }: PostNavigationProps) {
   if (!older && !newer) return null;
 
   return (
-    <div className="flex flex-col sm:flex-row items-stretch gap-4 py-12 border-t mt-16">
+    <div className="mt-16 flex flex-col items-stretch gap-4 border-t py-12 sm:flex-row">
       <div className="flex-1">
         {older ? (
           <Link
             href={`/blog/${older.slug}`}
-            className="group flex flex-col items-start gap-2 p-6 rounded-none border hover:bg-accent/50 transition-all h-full"
+            className="group hover:bg-accent/50 flex h-full flex-col items-start gap-2 rounded-none border p-6 transition-all"
           >
-            <span className="text-xs text-muted-foreground font-sans font-semibold uppercase tracking-widest flex items-center gap-1">
-              <ArrowLeft className="w-3 h-3 group-hover:-translate-x-1 transition-transform" />
+            <span className="text-muted-foreground flex items-center gap-1 font-sans text-xs font-semibold tracking-widest uppercase">
+              <ArrowLeft className="h-3 w-3 transition-transform group-hover:-translate-x-1" />
               Older Post
             </span>
-            <span className="text-base font-black group-hover:text-primary transition-colors">
+            <span className="group-hover:text-primary text-base font-black transition-colors">
               {older.metadata.title}
             </span>
           </Link>
@@ -34,13 +34,13 @@ export function PostNavigation({ older, newer }: PostNavigationProps) {
         {newer ? (
           <Link
             href={`/blog/${newer.slug}`}
-            className="group flex flex-col items-end gap-2 p-6 rounded-none border hover:bg-accent/50 transition-all text-right h-full"
+            className="group hover:bg-accent/50 flex h-full flex-col items-end gap-2 rounded-none border p-6 text-right transition-all"
           >
-            <span className="text-xs text-muted-foreground font-sans font-semibold uppercase tracking-widest flex items-center gap-1">
+            <span className="text-muted-foreground flex items-center gap-1 font-sans text-xs font-semibold tracking-widest uppercase">
               Newer Post
-              <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
             </span>
-            <span className="text-base font-black group-hover:text-primary transition-colors">
+            <span className="group-hover:text-primary text-base font-black transition-colors">
               {newer.metadata.title}
             </span>
           </Link>

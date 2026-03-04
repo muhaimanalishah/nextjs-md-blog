@@ -1,4 +1,9 @@
-import { getPostBySlug, getAllPosts, getRelatedPosts, getPostContent } from "@/lib/posts";
+import {
+  getPostBySlug,
+  getAllPosts,
+  getRelatedPosts,
+  getPostContent,
+} from "@/lib/posts";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { Metadata } from "next";
@@ -9,6 +14,8 @@ import { ShareButtons } from "@/components/ShareButtons";
 import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
 import rehypeHighlight from "rehype-highlight";
+import { PreWithCopy } from "@/components/PreWithCopy";
+import { Callout } from "@/components/Callout";
 
 interface PostPageProps {
   params: Promise<{ slug: string }>;
@@ -19,7 +26,9 @@ export async function generateStaticParams() {
   return posts.map((post) => ({ slug: post.slug }));
 }
 
-export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PostPageProps): Promise<Metadata> {
   const { slug } = await params;
   const post = await getPostBySlug(slug);
   if (!post) return { title: "Post Not Found" };
@@ -40,10 +49,10 @@ export default async function PostPage({ params }: PostPageProps) {
   ]);
 
   return (
-    <div className="container relative py-8 md:py-16 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+    <div className="animate-in fade-in slide-in-from-bottom-4 relative container py-8 duration-1000 md:py-16">
       <PostHeader post={post} />
-      <div className="flex flex-col lg:flex-row gap-16 max-w-6xl mx-auto">
-        <article className="flex-1 min-w-0">
+      <div className="mx-auto flex max-w-6xl flex-col gap-16 lg:flex-row">
+        <article className="min-w-0 flex-1">
           <div className="prose prose-zinc dark:prose-invert prose-lg md:prose-xl max-w-none font-serif leading-relaxed">
             <MDXRemote
               source={content}
@@ -53,12 +62,16 @@ export default async function PostPage({ params }: PostPageProps) {
                   rehypePlugins: [rehypeHighlight, rehypeSlug],
                 },
               }}
+              components={{
+                pre: (props) => <PreWithCopy {...props} />,
+                Callout,
+              }}
             />
           </div>
           <ShareButtons title={post.metadata.title} slug={post.slug} />
           <RelatedPosts posts={related} />
         </article>
-        <aside className="hidden lg:block w-64 shrink-0">
+        <aside className="hidden w-64 shrink-0 lg:block">
           <div className="sticky top-28 space-y-8">
             <TableOfContents />
           </div>

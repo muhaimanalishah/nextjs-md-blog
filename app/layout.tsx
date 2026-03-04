@@ -44,7 +44,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${lora.variable} ${geistMono.variable} ${geistSans.variable} antialiased selection:bg-primary/20`}
+        className={`${lora.variable} ${geistMono.variable} ${geistSans.variable} selection:bg-primary/20 antialiased`}
       >
         <ThemeProvider
           attribute="class"
@@ -52,10 +52,10 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="relative min-h-screen flex flex-col">
+          <div className="relative flex min-h-screen flex-col">
             <Header />
             <main className="flex-1">{children}</main>
-            <footer className="py-12 border-t text-center text-sm text-muted-foreground font-sans">
+            <footer className="text-muted-foreground border-t py-12 text-center font-sans text-sm">
               © {new Date().getFullYear()} Markdown Blog. All rights reserved.
             </footer>
           </div>

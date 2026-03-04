@@ -47,7 +47,7 @@ export function InfinitePostList({ initialPosts, tag }: InfinitePostListProps) {
           fetchMorePosts();
         }
       },
-      { threshold: 1.0 },
+      { threshold: 1.0 }
     );
 
     if (observerTarget.current) observer.observe(observerTarget.current);
@@ -57,20 +57,20 @@ export function InfinitePostList({ initialPosts, tag }: InfinitePostListProps) {
   return (
     <div className="flex flex-col gap-10">
       {/* Toolbar */}
-      <div className="flex items-center justify-between border-b border-border pb-4">
-        <span className="text-[10px] font-sans font-bold uppercase tracking-[0.3em] text-muted-foreground">
+      <div className="border-border flex items-center justify-between border-b pb-4">
+        <span className="text-muted-foreground font-sans text-[10px] font-bold tracking-[0.3em] uppercase">
           {posts.length} {posts.length === 1 ? "Post" : "Posts"}
         </span>
 
         {/* Hidden on mobile — grid = list on small screens anyway */}
-        <div className="hidden sm:flex items-center border border-border">
+        <div className="border-border hidden items-center border sm:flex">
           <button
             onClick={() => setLayout("grid")}
             className={cn(
-              "flex items-center gap-1.5 px-3 py-1.5 text-[10px] font-sans font-bold uppercase tracking-widest transition-all",
+              "flex items-center gap-1.5 px-3 py-1.5 font-sans text-[10px] font-bold tracking-widest uppercase transition-all",
               layout === "grid"
                 ? "bg-foreground text-background"
-                : "text-muted-foreground hover:text-foreground hover:bg-accent/30",
+                : "text-muted-foreground hover:text-foreground hover:bg-accent/30"
             )}
           >
             <LayoutGrid className="h-3 w-3" />
@@ -79,10 +79,10 @@ export function InfinitePostList({ initialPosts, tag }: InfinitePostListProps) {
           <button
             onClick={() => setLayout("list")}
             className={cn(
-              "flex items-center gap-1.5 px-3 py-1.5 text-[10px] font-sans font-bold uppercase tracking-widest transition-all",
+              "flex items-center gap-1.5 px-3 py-1.5 font-sans text-[10px] font-bold tracking-widest uppercase transition-all",
               layout === "list"
                 ? "bg-foreground text-background"
-                : "text-muted-foreground hover:text-foreground hover:bg-accent/30",
+                : "text-muted-foreground hover:text-foreground hover:bg-accent/30"
             )}
           >
             <ListIcon className="h-3 w-3" />
@@ -97,7 +97,7 @@ export function InfinitePostList({ initialPosts, tag }: InfinitePostListProps) {
           "grid gap-6 md:gap-8",
           layout === "grid"
             ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
-            : "grid-cols-1",
+            : "grid-cols-1"
         )}
       >
         <AnimatePresence mode="popLayout">
@@ -118,23 +118,23 @@ export function InfinitePostList({ initialPosts, tag }: InfinitePostListProps) {
 
       <div
         ref={observerTarget}
-        className="pt-4 flex flex-col items-center justify-center w-full"
+        className="flex w-full flex-col items-center justify-center pt-4"
       >
         {loading && (
           <div className="flex items-center gap-2 py-8">
-            <Loader2 className="h-4 w-4 animate-spin text-primary" />
-            <span className="text-[10px] uppercase font-black tracking-widest text-primary">
+            <Loader2 className="text-primary h-4 w-4 animate-spin" />
+            <span className="text-primary text-[10px] font-black tracking-widest uppercase">
               Loading
             </span>
           </div>
         )}
         {!hasMore && posts.length > 0 && (
-          <div className="flex items-center gap-4 w-full py-12">
-            <div className="h-px flex-1 bg-border/50" />
-            <span className="text-[10px] font-sans font-bold uppercase tracking-[0.3em] text-muted-foreground/40 whitespace-nowrap">
+          <div className="flex w-full items-center gap-4 py-12">
+            <div className="bg-border/50 h-px flex-1" />
+            <span className="text-muted-foreground/40 font-sans text-[10px] font-bold tracking-[0.3em] whitespace-nowrap uppercase">
               End of List
             </span>
-            <div className="h-px flex-1 bg-border/50" />
+            <div className="bg-border/50 h-px flex-1" />
           </div>
         )}
       </div>

@@ -32,22 +32,22 @@ export default async function TagPage({ params }: TagPageProps) {
   const { tag } = await params;
   const allPosts = await getAllPosts();
   const filteredPosts = allPosts.filter((post) =>
-    post.metadata.tags.includes(tag),
+    post.metadata.tags.includes(tag)
   );
 
   const initialPosts = filteredPosts.slice(0, 10);
 
   return (
-    <div className="container max-w-6xl py-12 md:py-24 animate-in fade-in slide-in-from-bottom-4 duration-1000">
-      <div className="flex flex-col gap-4 mb-12">
+    <div className="animate-in fade-in slide-in-from-bottom-4 container max-w-6xl py-12 duration-1000 md:py-24">
+      <div className="mb-12 flex flex-col gap-4">
         <div className="flex items-center gap-3">
           <span className="text-muted-foreground">Tagged with:</span>
           <TagBadge tag={tag} />
         </div>
-        <h1 className="text-4xl lg:text-5xl font-serif font-black tracking-tight capitalize">
+        <h1 className="font-serif text-4xl font-black tracking-tight capitalize lg:text-5xl">
           {tag}
         </h1>
-        <p className="text-xl text-muted-foreground">
+        <p className="text-muted-foreground text-xl">
           Found {filteredPosts.length} article
           {filteredPosts.length === 1 ? "" : "s"} specialized in this topic.
         </p>

@@ -18,9 +18,13 @@ export function CopyCodeButton({ onClick }: { onClick: () => void }) {
       size="icon"
       variant="ghost"
       onClick={handleClick}
-      className="h-7 w-7 text-muted-foreground hover:text-foreground"
+      className="text-muted-foreground hover:text-foreground h-7 w-7"
     >
-      {copied ? <Check className="h-3.5 w-3.5 text-green-500" /> : <Copy className="h-3.5 w-3.5" />}
+      {copied ? (
+        <Check className="h-3.5 w-3.5 text-green-500" />
+      ) : (
+        <Copy className="h-3.5 w-3.5" />
+      )}
       <span className="sr-only">Copy code</span>
     </Button>
   );

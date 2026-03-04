@@ -23,11 +23,11 @@ export default async function TagsPage() {
 
   return (
     <div className="container max-w-4xl py-12 md:py-24">
-      <div className="flex flex-col gap-4 mb-12 text-center">
-        <h1 className="text-4xl lg:text-5xl font-serif font-black tracking-tight">
+      <div className="mb-12 flex flex-col gap-4 text-center">
+        <h1 className="font-serif text-4xl font-black tracking-tight lg:text-5xl">
           Browse by Tags
         </h1>
-        <p className="text-xl text-muted-foreground">
+        <p className="text-muted-foreground text-xl">
           Explore posts by the topics that interest you most.
         </p>
       </div>
@@ -37,7 +37,7 @@ export default async function TagsPage() {
           <Link key={tag} href={`/tags/${tag}`}>
             <Badge
               variant="secondary"
-              className="text-lg py-2 px-4 gap-2 hover:bg-primary hover:text-primary-foreground transition-colors cursor-pointer rounded-none"
+              className="hover:bg-primary hover:text-primary-foreground cursor-pointer gap-2 rounded-none px-4 py-2 text-lg transition-colors"
             >
               {tag}{" "}
               <span className="text-muted-foreground text-sm font-normal">

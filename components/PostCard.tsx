@@ -17,9 +17,9 @@ export function PostCard({ post, layout = "list" }: PostCardProps) {
 
   if (layout === "list") {
     return (
-      <article className="group relative flex flex-row gap-6 border-b border-border/50 py-8 transition-all duration-300 px-4 hover:bg-muted/50 items-center">
+      <article className="group border-border/50 hover:bg-muted/50 relative flex flex-row items-center gap-6 border-b px-4 py-8 transition-all duration-300">
         {coverUrl && (
-          <div className="relative w-24 h-24 sm:w-32 sm:h-32 shrink-0 overflow-hidden bg-muted border border-border">
+          <div className="bg-muted border-border relative h-24 w-24 shrink-0 overflow-hidden border sm:h-32 sm:w-32">
             <Image
               src={coverUrl}
               alt={post.metadata.title}
@@ -29,8 +29,8 @@ export function PostCard({ post, layout = "list" }: PostCardProps) {
           </div>
         )}
 
-        <div className="flex-1 flex flex-col justify-center min-w-0">
-          <div className="flex items-center gap-2 text-[10px] text-muted-foreground font-sans font-bold uppercase tracking-widest mb-2">
+        <div className="flex min-w-0 flex-1 flex-col justify-center">
+          <div className="text-muted-foreground mb-2 flex items-center gap-2 font-sans text-[10px] font-bold tracking-widest uppercase">
             <span>{post.metadata.author}</span>
             <span className="text-muted-foreground/30">·</span>
             <time dateTime={post.metadata.date}>
@@ -44,13 +44,13 @@ export function PostCard({ post, layout = "list" }: PostCardProps) {
             <ReadingTime minutes={post.readingTime} />
           </div>
 
-          <Link href={`/blog/${post.slug}`} className="block group/title mb-2">
-            <h2 className="text-lg sm:text-xl font-serif font-black tracking-tight group-hover/title:text-primary transition-colors leading-snug">
+          <Link href={`/blog/${post.slug}`} className="group/title mb-2 block">
+            <h2 className="group-hover/title:text-primary font-serif text-lg leading-snug font-black tracking-tight transition-colors sm:text-xl">
               {post.metadata.title}.
             </h2>
           </Link>
 
-          <p className="hidden sm:block line-clamp-2 text-sm text-muted-foreground/70 leading-relaxed max-w-2xl mb-3">
+          <p className="text-muted-foreground/70 mb-3 line-clamp-2 hidden max-w-2xl text-sm leading-relaxed sm:block">
             {post.metadata.excerpt}
           </p>
 
@@ -61,7 +61,7 @@ export function PostCard({ post, layout = "list" }: PostCardProps) {
             {post.hasUrdu && (
               <Badge
                 variant="outline"
-                className="ml-auto text-primary border-none bg-primary/5 px-2 py-1 text-[8px] font-sans font-bold uppercase tracking-widest rounded-none"
+                className="text-primary bg-primary/5 ml-auto rounded-none border-none px-2 py-1 font-sans text-[8px] font-bold tracking-widest uppercase"
               >
                 Urdu
               </Badge>
@@ -74,9 +74,9 @@ export function PostCard({ post, layout = "list" }: PostCardProps) {
 
   // Grid layout
   return (
-    <article className="group relative flex flex-col h-full border border-border transition-all duration-300 hover:border-primary/40 hover:shadow-sm">
+    <article className="group border-border hover:border-primary/40 relative flex h-full flex-col border transition-all duration-300 hover:shadow-sm">
       {coverUrl && (
-        <div className="relative aspect-16/10 w-full overflow-hidden bg-muted">
+        <div className="bg-muted relative aspect-16/10 w-full overflow-hidden">
           <Image
             src={coverUrl}
             alt={post.metadata.title}
@@ -86,8 +86,8 @@ export function PostCard({ post, layout = "list" }: PostCardProps) {
         </div>
       )}
 
-      <div className="flex flex-col flex-1 p-5">
-        <div className="flex items-center gap-2 text-[10px] text-muted-foreground font-sans font-bold uppercase tracking-widest mb-3">
+      <div className="flex flex-1 flex-col p-5">
+        <div className="text-muted-foreground mb-3 flex items-center gap-2 font-sans text-[10px] font-bold tracking-widest uppercase">
           <span>{post.metadata.author}</span>
           <span className="text-muted-foreground/30">·</span>
           <time dateTime={post.metadata.date}>
@@ -101,25 +101,25 @@ export function PostCard({ post, layout = "list" }: PostCardProps) {
           <ReadingTime minutes={post.readingTime} />
         </div>
 
-        <div className="flex-1 space-y-2 mb-4">
-          <Link href={`/blog/${post.slug}`} className="block group/title">
-            <h2 className="text-lg font-serif font-black tracking-tight group-hover/title:text-primary transition-colors leading-snug line-clamp-2">
+        <div className="mb-4 flex-1 space-y-2">
+          <Link href={`/blog/${post.slug}`} className="group/title block">
+            <h2 className="group-hover/title:text-primary line-clamp-2 font-serif text-lg leading-snug font-black tracking-tight transition-colors">
               {post.metadata.title}.
             </h2>
           </Link>
-          <p className="line-clamp-2 text-sm text-muted-foreground/70 leading-relaxed">
+          <p className="text-muted-foreground/70 line-clamp-2 text-sm leading-relaxed">
             {post.metadata.excerpt}
           </p>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2 pt-3 mt-auto border-t border-border/40">
+        <div className="border-border/40 mt-auto flex flex-wrap items-center gap-2 border-t pt-3">
           {post.metadata.tags.slice(0, 2).map((tag) => (
             <TagBadge key={tag} tag={tag} />
           ))}
           {post.hasUrdu && (
             <Badge
               variant="outline"
-              className="ml-auto text-primary border-none bg-primary/5 px-2 py-1 text-[8px] font-sans font-bold uppercase tracking-widest rounded-none"
+              className="text-primary bg-primary/5 ml-auto rounded-none border-none px-2 py-1 font-sans text-[8px] font-bold tracking-widest uppercase"
             >
               Urdu
             </Badge>
