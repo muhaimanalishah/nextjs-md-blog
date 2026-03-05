@@ -28,14 +28,15 @@ export async function generateStaticParams() {
   return posts.map((post) => ({ slug: post.slug }));
 }
 
-
-export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PostPageProps): Promise<Metadata> {
   const { slug } = await params;
   const post = await getPostBySlug(slug);
   if (!post) return { title: "Post Not Found" };
 
   const coverUrl = post.metadata.cover
-    ? `${SITE_URL}/posts/${post.folder}/${post.metadata.cover.replace(/^\.\//, "")}`
+    ? `${SITE_URL}/posts/${post.folder}/${post.metadata.cover.replace(/^[\.\/]+/, "")}`
     : `${SITE_URL}/opengraph-image.png`;
 
   return {
@@ -52,7 +53,9 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
       publishedTime: post.metadata.date,
       authors: [post.metadata.author],
       tags: post.metadata.tags,
-      images: [{ url: coverUrl, width: 1200, height: 630, alt: post.metadata.title }],
+      images: [
+        { url: coverUrl, width: 1200, height: 630, alt: post.metadata.title },
+      ],
     },
     twitter: {
       card: "summary_large_image",

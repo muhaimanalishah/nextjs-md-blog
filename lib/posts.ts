@@ -24,6 +24,7 @@ export interface Post {
   urMetadata: UrduMetadata;
   hasUrdu: boolean;
   readingTime: number;
+  urReadingTime?: number;
 }
 
 const postsDirectory = path.join(process.cwd(), "content/posts");
@@ -36,31 +37,43 @@ function calculateReadingTime(text: string): number {
 export const getAllPosts = cache(async (): Promise<Post[]> => {
   if (!fs.existsSync(postsDirectory)) return [];
 
-  const folders = fs.readdirSync(postsDirectory).filter((file) => {
-    return fs.statSync(path.join(postsDirectory, file)).isDirectory();
+  const entries = await fs.promises.readdir(postsDirectory, {
+    withFileTypes: true,
   });
+  const folders = entries
+    .filter((dirent) => dirent.isDirectory())
+    .map((dirent) => dirent.name);
 
-  const posts: Post[] = folders.map((folder) => {
+  const postPromises = folders.map(async (folder) => {
     const enMdxPath = path.join(postsDirectory, folder, "en.mdx");
     const urMdxPath = path.join(postsDirectory, folder, "ur.mdx");
 
-    let enContent = "";
-    if (fs.existsSync(enMdxPath)) {
-      enContent = fs.readFileSync(enMdxPath, "utf8");
+    const hasEn = fs.existsSync(enMdxPath);
+    const hasUrdu = fs.existsSync(urMdxPath);
+
+    let contentToParse = "";
+    if (hasEn) {
+      contentToParse = await fs.promises.readFile(enMdxPath, "utf8");
+    } else if (hasUrdu) {
+      contentToParse = await fs.promises.readFile(urMdxPath, "utf8");
     }
 
-    const { data: metadata, content } = matter(enContent);
-    const hasUrdu = fs.existsSync(urMdxPath);
-    const readingTime = calculateReadingTime(content);
+    if (!contentToParse) return null;
+
+    const { data: metadata, content: enContentStr } = matter(contentToParse);
+    const readingTime = calculateReadingTime(enContentStr);
 
     let urMetadata: UrduMetadata = {};
+    let urReadingTime: number | undefined;
+
     if (hasUrdu) {
-      const urContent = fs.readFileSync(urMdxPath, "utf8");
-      const { data } = matter(urContent);
+      const urContent = await fs.promises.readFile(urMdxPath, "utf8");
+      const { data, content: urContentStr } = matter(urContent);
       urMetadata = {
         title: data.title,
         excerpt: data.excerpt,
       };
+      urReadingTime = calculateReadingTime(urContentStr);
     }
 
     const nameMatch = folder.match(/^\d{4}-\d{2}-\d{2}-(.*)$/);
@@ -73,12 +86,17 @@ export const getAllPosts = cache(async (): Promise<Post[]> => {
       urMetadata,
       hasUrdu,
       readingTime,
+      urReadingTime,
     };
   });
 
-  return posts.sort(
+  const posts = await Promise.all(postPromises);
+  const validPosts = posts.filter((p) => p !== null) as Post[];
+
+  return validPosts.sort(
     (a, b) =>
-      new Date(b.metadata.date).getTime() - new Date(a.metadata.date).getTime()
+      new Date(b.metadata.date || 0).getTime() -
+      new Date(a.metadata.date || 0).getTime()
   );
 });
 
@@ -88,7 +106,7 @@ export async function getPostContent(
 ): Promise<string> {
   const filePath = path.join(postsDirectory, folder, `${lang}.mdx`);
   if (!fs.existsSync(filePath)) return "";
-  const raw = fs.readFileSync(filePath, "utf8");
+  const raw = await fs.promises.readFile(filePath, "utf8");
   const { content } = matter(raw);
   return content;
 }
@@ -117,8 +135,8 @@ export async function getRelatedPosts(post: Post, count = 3): Promise<Post[]> {
     .sort((a, b) =>
       b.score !== a.score
         ? b.score - a.score
-        : new Date(b.post.metadata.date).getTime() -
-          new Date(a.post.metadata.date).getTime()
+        : new Date(b.post.metadata.date || 0).getTime() -
+          new Date(a.post.metadata.date || 0).getTime()
     )
     .slice(0, count)
     .map(({ post }) => post);

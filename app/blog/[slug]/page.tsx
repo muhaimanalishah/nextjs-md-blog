@@ -37,7 +37,7 @@ export async function generateMetadata({
   if (!post) return { title: "Post Not Found" };
 
   const coverUrl = post.metadata.cover
-    ? `${SITE_URL}/posts/${post.folder}/${post.metadata.cover.replace(/^\.\//, "")}`
+    ? `${SITE_URL}/posts/${post.folder}/${post.metadata.cover.replace(/^[\.\/]+/, "")}`
     : `${SITE_URL}/opengraph-image.png`;
 
   return {
@@ -87,10 +87,13 @@ export default async function PostPage({ params }: PostPageProps) {
           headline: post.metadata.title,
           description: post.metadata.excerpt,
           datePublished: post.metadata.date,
-          author: { "@type": "Person", name: post.metadata.author },
+          author: {
+            "@type": "Person",
+            name: post.metadata.author || "Muhaiman Ali Shah",
+          },
           url: `${SITE_URL}/blog/${slug}`,
           image: post.metadata.cover
-            ? `${SITE_URL}/posts/${post.folder}/${post.metadata.cover.replace(/^\.\//, "")}`
+            ? `${SITE_URL}/posts/${post.folder}/${post.metadata.cover.replace(/^[\.\/]+/, "")}`
             : `${SITE_URL}/opengraph-image.png`,
         }}
       />

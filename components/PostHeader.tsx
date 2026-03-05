@@ -11,7 +11,7 @@ interface PostHeaderProps {
 
 export function PostHeader({ post, isUrdu = false }: PostHeaderProps) {
   const coverUrl = post.metadata.cover
-    ? `/posts/${post.folder}/${post.metadata.cover.replace(/^\.\//, "")}`
+    ? `/posts/${post.folder}/${post.metadata.cover.replace(/^[\.\/]+/, "")}`
     : null;
 
   return (
@@ -34,7 +34,13 @@ export function PostHeader({ post, isUrdu = false }: PostHeaderProps) {
             })}
           </time>
           <span className="text-muted-foreground/30">·</span>
-          <ReadingTime minutes={post.readingTime} />
+          <ReadingTime
+            minutes={
+              isUrdu && post.urReadingTime
+                ? post.urReadingTime
+                : post.readingTime
+            }
+          />
           {isUrdu && (
             <>
               <span className="text-muted-foreground/30">·</span>

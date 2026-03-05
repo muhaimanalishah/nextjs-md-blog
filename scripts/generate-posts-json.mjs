@@ -13,19 +13,31 @@ const folders = fs
 const posts = folders
   .map((folder) => {
     const enPath = path.join(postsDir, folder, "en.mdx");
-    if (!fs.existsSync(enPath)) return null;
-    const raw = fs.readFileSync(enPath, "utf8");
+    const urPath = path.join(postsDir, folder, "ur.mdx");
+
+    const hasEn = fs.existsSync(enPath);
+    const hasUrdu = fs.existsSync(urPath);
+
+    let raw = "";
+    if (hasEn) {
+      raw = fs.readFileSync(enPath, "utf8");
+    } else if (hasUrdu) {
+      raw = fs.readFileSync(urPath, "utf8");
+    }
+
+    if (!raw) return null;
+
     const { data: metadata, content } = matter(raw);
-    const hasUrdu = fs.existsSync(path.join(postsDir, folder, "ur.mdx"));
 
     let urMetadata = {};
+    let urReadingTime = undefined;
+
     if (hasUrdu) {
-      const urRaw = fs.readFileSync(
-        path.join(postsDir, folder, "ur.mdx"),
-        "utf8"
-      );
-      const { data } = matter(urRaw);
+      const urRaw = fs.readFileSync(urPath, "utf8");
+      const { data, content: urContentStr } = matter(urRaw);
       urMetadata = { title: data.title, excerpt: data.excerpt };
+      const words = urContentStr.split(/\s+/).filter(Boolean).length;
+      urReadingTime = Math.max(1, Math.ceil(words / 200));
     }
 
     const words = content.split(/\s+/).filter(Boolean).length;
@@ -37,10 +49,15 @@ const posts = folders
       urMetadata,
       hasUrdu,
       readingTime: Math.max(1, Math.ceil(words / 200)),
+      urReadingTime,
     };
   })
   .filter(Boolean)
-  .sort((a, b) => new Date(b.metadata.date) - new Date(a.metadata.date));
+  .sort(
+    (a, b) =>
+      new Date(b.metadata?.date || 0).getTime() -
+      new Date(a.metadata?.date || 0).getTime()
+  );
 
 fs.mkdirSync(outDir, { recursive: true });
 
@@ -60,9 +77,9 @@ function writePages(subset, prefix) {
 writePages(posts, "posts");
 
 // Per-tag pages
-const tags = [...new Set(posts.flatMap((p) => p.metadata.tags))];
+const tags = [...new Set(posts.flatMap((p) => p.metadata.tags || []))];
 for (const tag of tags) {
-  const tagged = posts.filter((p) => p.metadata.tags.includes(tag));
+  const tagged = posts.filter((p) => (p.metadata.tags || []).includes(tag));
   writePages(tagged, `posts-${tag}`);
 }
 
