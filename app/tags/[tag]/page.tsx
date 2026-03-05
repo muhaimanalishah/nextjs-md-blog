@@ -26,11 +26,11 @@ export async function generateMetadata({
   const { tag } = await params;
   return {
     title: `Posts tagged "${tag}"`,
-    description: `All posts about ${tag} on muhaiman.dev.`,
+    description: `All posts about ${tag} on muhaiman.dev`,
     alternates: { canonical: `${SITE_URL}/tags/${tag}` },
     openGraph: {
       title: `Posts tagged "${tag}" — muhaiman.dev`,
-      description: `All posts about ${tag} on muhaiman.dev.`,
+      description: `All posts about ${tag} on muhaiman.dev`,
       type: "website",
       url: `${SITE_URL}/tags/${tag}`,
     },

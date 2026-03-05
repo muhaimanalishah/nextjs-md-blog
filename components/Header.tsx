@@ -38,7 +38,7 @@ export function Header() {
         <div className="flex flex-none items-center justify-center">
           <Link href="/" className="flex items-center">
             <span className="text-foreground font-serif text-xl font-black tracking-widest md:text-2xl">
-              muhaiman.dev.
+              muhaiman.dev
             </span>
           </Link>
         </div>

@@ -43,13 +43,13 @@ export function Callout({ variant = "info", title, children }: CalloutProps) {
         <Icon className={`h-4 w-4 shrink-0 ${iconClass}`} />
         {title && (
           <p
-            className={`font-sans text-[11px] font-bold tracking-widest uppercase ${titleClass}`}
+            className={`font-sans text-sm font-bold tracking-widest uppercase ${titleClass}`}
           >
             {title}
           </p>
         )}
       </div>
-      <div className="text-muted-foreground text-sm leading-relaxed [&>p]:m-0">
+      <div className="text-muted-foreground leading-relaxed [&>p]:m-0">
         {children}
       </div>
     </div>

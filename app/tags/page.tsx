@@ -5,10 +5,10 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "All Tags",
-  description: "Browse all topics covered on muhaiman.dev.",
+  description: "Browse all topics covered on muhaiman.dev",
   openGraph: {
     title: "All Tags — muhaiman.dev",
-    description: "Browse all topics covered on muhaiman.dev.",
+    description: "Browse all topics covered on muhaiman.dev",
     type: "website",
   },
 };

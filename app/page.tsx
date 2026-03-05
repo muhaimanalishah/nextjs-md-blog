@@ -24,7 +24,7 @@ export default async function Home() {
         <div className="container mx-auto max-w-6xl px-6">
           <div className="max-w-2xl space-y-4">
             <h1 className="text-foreground font-serif text-5xl leading-none font-black tracking-tight md:text-7xl">
-              muhaiman.dev.
+              muhaiman.dev
             </h1>
             <p className="text-muted-foreground max-w-md font-sans text-base leading-relaxed">
               I build. I learn. I write.
