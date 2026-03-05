@@ -4,10 +4,12 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Home",
-  description: "Exploring the latest in web development, bilingual architecture, and more.",
+  description:
+    "Exploring the latest in web development, bilingual architecture, and more.",
   openGraph: {
-    title: "miloasdev",
-    description: "Exploring the latest in web development, bilingual architecture, and more.",
+    title: "muhaiman.dev",
+    description:
+      "Exploring the latest in web development, bilingual architecture, and more.",
     type: "website",
   },
 };
@@ -22,7 +24,7 @@ export default async function Home() {
         <div className="container mx-auto max-w-6xl px-6">
           <div className="max-w-2xl space-y-4">
             <h1 className="text-foreground font-serif text-5xl leading-none font-black tracking-tight md:text-7xl">
-              miloasdev.
+              muhaiman.dev.
             </h1>
             <p className="text-muted-foreground max-w-md font-sans text-base leading-relaxed">
               I build. I learn. I write.

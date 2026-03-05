@@ -20,12 +20,12 @@ const geistMono = Geist_Mono({
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
 export const metadata: Metadata = {
-  title: { default: "miloasdev", template: "%s - miloasdev" },
+  title: { default: "muhaiman.dev", template: "%s - muhaiman.dev" },
   description: "Muhaiman Ali Shah. Writing about what I build and learn.",
   metadataBase: new URL(SITE_URL),
   alternates: { types: { "application/rss+xml": "/feed.xml" } },
   openGraph: {
-    siteName: "miloasdev",
+    siteName: "muhaiman.dev",
     url: SITE_URL,
     images: [{ url: `${SITE_URL}/opengraph-image.png` }],
   },

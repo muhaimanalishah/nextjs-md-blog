@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   description:
     "Muhaiman Ali Shah — full stack developer and data science student from Pakistan.",
   openGraph: {
-    title: "About — miloasdev",
+    title: "About — muhaiman.dev",
     description:
       "Muhaiman Ali Shah — full stack developer and data science student from Pakistan.",
     type: "profile",
