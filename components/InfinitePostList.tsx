@@ -18,11 +18,13 @@ export function InfinitePostList({ initialPosts, tag }: InfinitePostListProps) {
   const [loading, setLoading] = React.useState(false);
   const [hasMore, setHasMore] = React.useState(initialPosts.length >= 10);
   const [layout, setLayout] = React.useState<"list" | "grid">("grid");
+  const [error, setError] = React.useState(false);
   const observerTarget = React.useRef<HTMLDivElement>(null);
 
   const fetchMorePosts = React.useCallback(async () => {
     if (loading || !hasMore) return;
 
+    setError(false);
     setLoading(true);
     try {
       const prefix = tag ? `posts-${tag}` : "posts";
@@ -35,6 +37,7 @@ export function InfinitePostList({ initialPosts, tag }: InfinitePostListProps) {
       setPage((prev) => prev + 1);
     } catch (error) {
       console.error(error);
+      setError(true);
     } finally {
       setLoading(false);
     }
@@ -62,7 +65,6 @@ export function InfinitePostList({ initialPosts, tag }: InfinitePostListProps) {
           {posts.length} {posts.length === 1 ? "Post" : "Posts"}
         </span>
 
-        {/* Hidden on mobile — grid = list on small screens anyway */}
         <div className="border-border hidden items-center border sm:flex">
           <button
             onClick={() => setLayout("grid")}
@@ -120,6 +122,14 @@ export function InfinitePostList({ initialPosts, tag }: InfinitePostListProps) {
         ref={observerTarget}
         className="flex w-full flex-col items-center justify-center pt-4"
       >
+        {error && (
+          <p className="text-muted-foreground py-8 text-center text-sm">
+            Failed to load posts.{" "}
+            <button onClick={fetchMorePosts} className="underline">
+              Retry
+            </button>
+          </p>
+        )}
         {loading && (
           <div className="flex items-center gap-2 py-8">
             <Loader2 className="text-primary h-4 w-4 animate-spin" />

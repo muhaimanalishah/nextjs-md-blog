@@ -21,7 +21,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
 export const metadata: Metadata = {
   title: {
-    default: "miloadev",
+    default: "miloasdev",
     template: "%s - miloasdev",
   },
   description: "Muhaiman Ali Shah. Writing about what I build and learn.",

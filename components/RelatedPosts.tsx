@@ -18,7 +18,7 @@ export function RelatedPosts({ posts }: RelatedPostsProps) {
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {posts.map((post) => {
           const coverUrl = post.metadata.cover
-            ? `/posts/${post.folder}/${post.metadata.cover}`
+            ? `/posts/${post.folder}/${post.metadata.cover.replace(/^\.\//, "")}`
             : null;
 
           return (
