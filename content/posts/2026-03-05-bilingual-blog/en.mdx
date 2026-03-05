@@ -1,0 +1,81 @@
+---
+title: "I Built a Bilingual Blog and It Was More Complicated Than I Expected"
+date: "2026-03-05"
+tags: ["nextjs", "webdev", "personal"]
+excerpt: "I wanted Pakistanis to read my blog in Urdu. Here's what that actually looked like in code."
+cover: "./cover.jpg"
+author: "Muhaiman"
+---
+
+I'm 19, I live in Pakistan, and I wanted to build a blog. Simple enough. But then I thought — why not make it bilingual? English for the wider dev community, Urdu for the people back home who don't always read tech content in English.
+
+That one decision made everything about three times harder.
+
+## The idea
+
+The plan was simple: one folder per post, two files inside — `en.mdx` and `ur.mdx`. Same post, two languages. A toggle button lets you switch between them.
+
+```text
+content/posts/
+  2026-03-01-my-first-post/
+    en.mdx
+    ur.mdx
+```
+
+<Callout variant="info" title="What is MDX?">
+MDX is just Markdown with superpowers — you can use React components inside your writing. So instead of plain text, you can drop in interactive UI like this callout box.
+</Callout>
+
+Clean, right? It was, until I started actually building it.
+
+## What went wrong (and what I learned)
+
+**Frontmatter is duplicated.** Every MDX file starts with a block of metadata at the top called frontmatter — things like the title, date, tags, and excerpt. In my setup, both `en.mdx` and `ur.mdx` have their own frontmatter. So if I change the date, I have to change it in two places.
+
+```text
+---
+title: "My Post Title"
+date: "2026-03-05"
+tags: ["webdev"]
+excerpt: "A short description."
+author: "Muhaiman"
+---
+```
+
+<Callout variant="warning" title="Easy to get wrong">
+If your frontmatter has a typo — like a wrong date format or a missing field — nothing tells you. The post just breaks silently. I'll get to how I fixed this.
+</Callout>
+
+**Reading time per language.** Urdu posts are written differently — sentence structures are longer, the script is denser. So I had to calculate reading time separately for each language instead of just reusing the English number.
+
+**RSS only works in English.** I built an RSS feed and it just... skips Urdu-only posts. I haven't fixed this yet. It's on the list.
+
+## The part that actually broke things
+
+I was casting frontmatter data directly to a TypeScript type with no validation. So if I made a typo in the date field — say `"2026-3-1"` instead of `"2026-03-01"` — the whole sort broke silently. Posts appeared in the wrong order and I had no idea why.
+
+<Callout variant="tip" title="What is Zod?">
+Zod is a library that lets you define a schema — basically a set of rules — and then validate data against it at runtime. If the data doesn't match, it throws a clear error instead of silently failing.
+</Callout>
+
+I ended up adding Zod to validate every post's frontmatter at build time. Now if something's wrong, it logs the folder name and skips the post instead of silently breaking everything.
+
+```ts
+const PostMetadataSchema = z.object({
+  title: z.string().min(1),
+  date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "date must be YYYY-MM-DD"),
+  tags: z.array(z.string()).min(1),
+  excerpt: z.string().min(1),
+  author: z.string().min(1),
+});
+```
+
+Should've done this from the start.
+
+## Was it worth it?
+
+Honestly, yes. Not because the code is elegant — it's not. But because when I showed the Urdu version to my family, they actually read it. That's the whole point.
+
+If you're thinking about doing something similar: start with English only, get comfortable with the stack, then add the second language. Don't do what I did and try to build both at once on a stack you're still learning.
+
+I'm still figuring things out. But that's kind of the whole point of having a blog at 19.
