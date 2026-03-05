@@ -2,20 +2,12 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { cache } from "react";
-
-export interface PostMetadata {
-  title: string;
-  date: string;
-  tags: string[];
-  excerpt: string;
-  cover?: string;
-  author: string;
-}
-
-export interface UrduMetadata {
-  title?: string;
-  excerpt?: string;
-}
+import {
+  type PostMetadata,
+  type UrduMetadata,
+  PostMetadataSchema,
+  UrduMetadataSchema,
+} from "./post.validate";
 
 export interface Post {
   slug: string;
@@ -60,7 +52,18 @@ export const getAllPosts = cache(async (): Promise<Post[]> => {
 
     if (!contentToParse) return null;
 
-    const { data: metadata, content: enContentStr } = matter(contentToParse);
+    let metadata: PostMetadata;
+    let enContentStr: string;
+
+    try {
+      const parsed = matter(contentToParse);
+      metadata = PostMetadataSchema.parse(parsed.data);
+      enContentStr = parsed.content;
+    } catch (err) {
+      console.error(`[posts] Skipping "${folder}" — invalid frontmatter:`, err);
+      return null;
+    }
+
     const readingTime = calculateReadingTime(enContentStr);
 
     let urMetadata: UrduMetadata = {};
@@ -69,10 +72,12 @@ export const getAllPosts = cache(async (): Promise<Post[]> => {
     if (hasUrdu) {
       const urContent = await fs.promises.readFile(urMdxPath, "utf8");
       const { data, content: urContentStr } = matter(urContent);
-      urMetadata = {
-        title: data.title,
-        excerpt: data.excerpt,
-      };
+      try {
+        urMetadata = UrduMetadataSchema.parse(data);
+      } catch (err) {
+        console.error(`[posts] Invalid Urdu frontmatter in "${folder}":`, err);
+        urMetadata = {};
+      }
       urReadingTime = calculateReadingTime(urContentStr);
     }
 
