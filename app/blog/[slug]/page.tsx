@@ -16,6 +16,7 @@ import rehypeSlug from "rehype-slug";
 import rehypeHighlight from "rehype-highlight";
 import { PreWithCopy } from "@/components/PreWithCopy";
 import { Callout } from "@/components/Callout";
+import { JsonLd } from "@/components/JsonLd";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
@@ -28,8 +29,9 @@ export async function generateStaticParams() {
   return posts.map((post) => ({ slug: post.slug }));
 }
 
-
-export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PostPageProps): Promise<Metadata> {
   const { slug } = await params;
   const post = await getPostBySlug(slug);
   if (!post) return { title: "Post Not Found" };
@@ -52,7 +54,9 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
       publishedTime: post.metadata.date,
       authors: [post.metadata.author],
       tags: post.metadata.tags,
-      images: [{ url: coverUrl, width: 1200, height: 630, alt: post.metadata.title }],
+      images: [
+        { url: coverUrl, width: 1200, height: 630, alt: post.metadata.title },
+      ],
     },
     twitter: {
       card: "summary_large_image",
@@ -76,6 +80,20 @@ export default async function PostPage({ params }: PostPageProps) {
 
   return (
     <div className="animate-in fade-in slide-in-from-bottom-4 relative container py-8 duration-1000 md:py-16">
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          headline: post.metadata.title,
+          description: post.metadata.excerpt,
+          datePublished: post.metadata.date,
+          author: { "@type": "Person", name: post.metadata.author },
+          url: `${SITE_URL}/blog/${slug}`,
+          image: post.metadata.cover
+            ? `${SITE_URL}/posts/${post.folder}/${post.metadata.cover.replace(/^\.\//, "")}`
+            : `${SITE_URL}/opengraph-image.png`,
+        }}
+      />
       <PostHeader post={post} />
       <div className="mx-auto flex max-w-6xl flex-col gap-16 lg:flex-row">
         <article className="min-w-0 flex-1">

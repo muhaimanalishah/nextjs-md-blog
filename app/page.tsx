@@ -4,8 +4,12 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Home",
-  description:
-    "Exploring the latest in web development, bilingual architecture, and more.",
+  description: "Exploring the latest in web development, bilingual architecture, and more.",
+  openGraph: {
+    title: "miloasdev",
+    description: "Exploring the latest in web development, bilingual architecture, and more.",
+    type: "website",
+  },
 };
 
 export default async function Home() {

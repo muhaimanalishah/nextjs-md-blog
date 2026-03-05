@@ -1,13 +1,17 @@
 import { getAllPosts } from "@/lib/posts";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
+import { Metadata } from "next";
 
-export async function generateMetadata() {
-  return {
-    title: "All Tags",
-    description: "Browse all topics covered in the blog.",
-  };
-}
+export const metadata: Metadata = {
+  title: "All Tags",
+  description: "Browse all topics covered on miloasdev.",
+  openGraph: {
+    title: "All Tags — miloasdev",
+    description: "Browse all topics covered on miloasdev.",
+    type: "website",
+  },
+};
 
 export default async function TagsPage() {
   const allPosts = await getAllPosts();

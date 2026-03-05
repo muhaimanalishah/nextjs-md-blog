@@ -3,6 +3,8 @@ import { InfinitePostList } from "@/components/InfinitePostList";
 import { Metadata } from "next";
 import { TagBadge } from "@/components/TagBadge";
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+
 interface TagPageProps {
   params: Promise<{ tag: string }>;
 }
@@ -23,8 +25,15 @@ export async function generateMetadata({
 }: TagPageProps): Promise<Metadata> {
   const { tag } = await params;
   return {
-    title: `Posts tagged with "${tag}"`,
-    description: `All blog posts categorized under the tag "${tag}".`,
+    title: `Posts tagged "${tag}"`,
+    description: `All posts about ${tag} on miloasdev.`,
+    alternates: { canonical: `${SITE_URL}/tags/${tag}` },
+    openGraph: {
+      title: `Posts tagged "${tag}" — miloasdev`,
+      description: `All posts about ${tag} on miloasdev.`,
+      type: "website",
+      url: `${SITE_URL}/tags/${tag}`,
+    },
   };
 }
 

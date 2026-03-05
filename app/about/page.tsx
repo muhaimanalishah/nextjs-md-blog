@@ -8,10 +8,20 @@ import rehypeSlug from "rehype-slug";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { PreWithCopy } from "@/components/PreWithCopy";
 import { Callout } from "@/components/Callout";
+import { JsonLd } from "@/components/JsonLd";
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "Learn more about the person behind this blog.",
+  description:
+    "Muhaiman Ali Shah — full stack developer and data science student from Pakistan.",
+  openGraph: {
+    title: "About — miloasdev",
+    description:
+      "Muhaiman Ali Shah — full stack developer and data science student from Pakistan.",
+    type: "profile",
+  },
 };
 
 export default function AboutPage() {
@@ -21,6 +31,18 @@ export default function AboutPage() {
 
   return (
     <div className="animate-in fade-in slide-in-from-bottom-4 container max-w-3xl py-12 duration-1000 md:py-24">
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "Person",
+          name: "Muhaiman Ali Shah",
+          url: `${SITE_URL}/about`,
+          sameAs: [
+            "https://github.com/muhaimanalishah",
+            "https://x.com/muhaiman_as",
+          ],
+        }}
+      />
       <div className="mb-8 flex flex-col gap-4">
         <h1 className="font-serif text-4xl font-black tracking-tight lg:text-5xl">
           About
